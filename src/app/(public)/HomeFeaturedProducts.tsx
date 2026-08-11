@@ -1,14 +1,23 @@
 // Server Component: fetches featured products for the homepage
+import { unstable_cache } from "next/cache";
 import ProductCard from "@/components/product/ProductCard";
 import EmptyState from "@/components/ui/EmptyState";
 import { productService } from "@/services/product.service";
 import type { Product } from "@/types/product";
 
+const getFeaturedProducts = unstable_cache(
+  async (): Promise<Product[]> => {
+    const data = await productService.getProducts({ status: "ACTIVE", limit: 8, page: 1 });
+    return data.products;
+  },
+  ["featured-products"],
+  { revalidate: 60 }
+);
+
 export default async function HomeFeaturedProducts() {
   let products: Product[];
   try {
-    const data = await productService.getProducts({ status: "ACTIVE", limit: 8, page: 1 });
-    products = data.products;
+    products = await getFeaturedProducts();
   } catch {
     // Backend might not be running during dev — show placeholder
     products = [];

@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart, Eye, Package } from "lucide-react";
+import { motion } from "framer-motion";
+import { ShoppingCart, Eye, Package, Check } from "lucide-react";
 import type { Product } from "@/types/product";
 import { useCart } from "@/context/CartContext";
 import { formatPrice, stringToGradient, truncate } from "@/lib/utils";
@@ -34,96 +36,123 @@ export default function ProductCard({ product }: ProductCardProps) {
   const gradient = stringToGradient(product.id + product.title);
 
   return (
-    <article className="group bg-white rounded-2xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] overflow-hidden transition-all duration-300 hover:shadow-[0px_8px_30px_rgba(15,23,42,0.1)] hover:-translate-y-0.5 flex flex-col">
-      {/* Product Image Placeholder */}
-      <Link href={`/products/${product.id}`} className="block relative overflow-hidden" aria-label={`View ${product.title}`}>
+    <motion.article
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className="group bg-white rounded-2xl border border-[#f0edef] shadow-[0px_4px_20px_rgba(15,23,42,0.04)] hover:shadow-[0px_12px_40px_rgba(15,23,42,0.1)] overflow-hidden transition-shadow duration-300 flex flex-col h-full"
+    >
+      {/* Image Showcase Container */}
+      <Link
+        href={`/products/${product.id}`}
+        className="block relative overflow-hidden bg-[#fcf8fa] h-56"
+        aria-label={`View ${product.title}`}
+      >
         {product.image ? (
-          // eslint-disable-next-line @next/next/no-img-element -- remote product image
-          <img src={product.image} alt={product.title} className="w-full h-52 object-cover" />
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
         ) : (
           <div
-            className="w-full h-52 flex items-center justify-center"
+            className="w-full h-56 flex items-center justify-center transition-transform duration-500 group-hover:scale-105"
             style={{ background: gradient }}
             aria-hidden="true"
           >
-            <Package size={40} className="text-white/50" />
+            <Package size={44} className="text-white/60" />
           </div>
         )}
-        <div className="absolute inset-0 bg-[#0f172a]/0 group-hover:bg-[#0f172a]/5 transition-colors duration-300" />
-        {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+
+        {/* Hover Overlay Filter */}
+        <div className="absolute inset-0 bg-[#0f172a]/0 group-hover:bg-[#0f172a]/10 transition-colors duration-300 pointer-events-none" />
+
+        {/* Status Badges */}
+        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
           <StatusBadge status={product.status} />
           {outOfStock && (
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#ba1a1a]/10 text-[#ba1a1a]">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#ba1a1a] text-white shadow-sm font-[family-name:var(--font-geist)]">
               Out of Stock
             </span>
           )}
         </div>
-        {/* Quick view on hover */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <span className="flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-[#0f172a] text-xs font-medium px-3 py-1.5 rounded-full shadow-sm">
-            <Eye size={13} />
+
+        {/* Quick View Button on Hover */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 pointer-events-none">
+          <span className="inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-md text-[#0f172a] text-xs font-bold px-4 py-2 rounded-full shadow-lg border border-white/40 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 font-[family-name:var(--font-geist)]">
+            <Eye size={14} />
             Quick View
           </span>
         </div>
       </Link>
 
-      {/* Content */}
-      <div className="p-5 flex flex-col flex-1 gap-3">
-        {/* Category */}
+      {/* Card Content */}
+      <div className="p-5 flex flex-col flex-1 gap-2.5">
+        {/* Category Badge */}
         {product.category && (
-          <span className="text-xs font-medium text-[#006c49] font-[family-name:var(--font-geist)] uppercase tracking-wide">
+          <span className="text-[11px] font-bold text-[#006c49] font-[family-name:var(--font-geist)] uppercase tracking-wider">
             {product.category.name}
           </span>
         )}
 
         {/* Title */}
         <Link href={`/products/${product.id}`}>
-          <h3 className="text-sm font-semibold text-[#1b1b1d] font-[family-name:var(--font-geist)] leading-snug hover:text-[#0f172a] line-clamp-2">
+          <h3 className="text-base font-bold text-[#0f172a] font-[family-name:var(--font-geist)] leading-snug group-hover:text-[#006c49] transition-colors line-clamp-2">
             {product.title}
           </h3>
         </Link>
 
-        {/* Rating */}
-        <div className="flex items-center gap-2">
+        {/* Rating Stars & Review Count */}
+        <div className="flex items-center gap-2 my-0.5">
           <RatingStars rating={product.averageRating ?? 0} size={14} />
-          <span className="text-xs text-[#76777d]">
+          <span className="text-xs text-[#76777d] font-medium">
             ({product._count?.reviews ?? 0})
           </span>
         </div>
 
-        {/* Price + Stock */}
-        <div className="flex items-center justify-between mt-auto">
-          <span className="text-base font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">
-            {formatPrice(product.price)}
-          </span>
-          <span className="text-xs text-[#76777d]">
-            {product.stock > 0 ? `${product.stock} left` : ""}
+        {/* Price & Stock info */}
+        <div className="flex items-baseline justify-between mt-auto pt-2">
+          <div>
+            <span className="text-xs text-[#76777d] block font-medium">Price</span>
+            <span className="text-lg font-extrabold text-[#0f172a] font-[family-name:var(--font-geist)]">
+              {formatPrice(product.price)}
+            </span>
+          </div>
+
+          <span
+            className={`text-xs font-medium px-2 py-0.5 rounded-md ${
+              product.stock > 0
+                ? "bg-[#d1fae5] text-[#065f46]"
+                : "bg-[#f1f5f9] text-[#64748b]"
+            }`}
+          >
+            {product.stock > 0 ? `${product.stock} in stock` : "Sold Out"}
           </span>
         </div>
 
-        {/* Actions */}
-        <div className="flex gap-2 mt-1">
+        {/* Action Buttons */}
+        <div className="flex gap-2 pt-2">
           <Button
-            variant="primary"
+            variant={isInCart ? "secondary" : "primary"}
             size="sm"
             fullWidth
             disabled={outOfStock}
             onClick={handleAddToCart}
-            className="text-xs"
+            className="text-xs font-semibold py-2.5 rounded-xl shadow-sm"
           >
-            <ShoppingCart size={13} />
+            {isInCart ? <Check size={14} /> : <ShoppingCart size={14} />}
             {isInCart ? "In Cart" : "Add to Cart"}
           </Button>
           <Link
             href={`/products/${product.id}`}
-            className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-lg border border-[#c6c6cd] text-[#45464d] hover:bg-[#f0edef] hover:text-[#0f172a] transition-colors"
-            aria-label="View details"
+            className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-xl border border-[#c6c6cd] text-[#45464d] hover:bg-[#f0edef] hover:text-[#0f172a] hover:border-[#0f172a] transition-all"
+            aria-label="View product details"
           >
-            <Eye size={14} />
+            <Eye size={15} />
           </Link>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
