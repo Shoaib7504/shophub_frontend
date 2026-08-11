@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/* ─── Executive Precision Design System ──────────────────────────────────────
+   Based on the "NextCommerce Pro Frontend" Stitch project.
+   Color mode: LIGHT | Fonts: Geist (headlines/labels) + Inter (body)
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@theme inline {
+  /* ── Typography ── */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Geist", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* ── Brand Colors ── */
+  --color-primary: #0f172a;
+  --color-primary-hover: #1e293b;
+  --color-primary-light: #334155;
+
+  --color-secondary: #006c49;
+  --color-secondary-hover: #00503a;
+  --color-secondary-container: #6cf8bb;
+  --color-on-secondary: #ffffff;
+
+  /* ── Surface Scale ── */
+  --color-background: #fcf8fa;
+  --color-surface: #ffffff;
+  --color-surface-low: #f6f3f5;
+  --color-surface-container: #f0edef;
+  --color-surface-high: #eae7e9;
+  --color-surface-highest: #e4e2e4;
+  --color-surface-dim: #dcd9db;
+
+  /* ── Text ── */
+  --color-on-surface: #1b1b1d;
+  --color-on-surface-variant: #45464d;
+  --color-on-surface-muted: #76777d;
+
+  /* ── Outline ── */
+  --color-outline: #76777d;
+  --color-outline-variant: #c6c6cd;
+
+  /* ── Semantic ── */
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-success: #006c49;
+  --color-warning: #d97706;
+  --color-info: #3323cc;
+
+  /* ── Status Badge Colors ── */
+  --color-pending-bg: #fef3c7;
+  --color-pending-text: #92400e;
+  --color-confirmed-bg: #e0e7ff;
+  --color-confirmed-text: #3730a3;
+  --color-shipped-bg: #dbeafe;
+  --color-shipped-text: #1e40af;
+  --color-delivered-bg: #d1fae5;
+  --color-delivered-text: #065f46;
+  --color-cancelled-bg: #f1f5f9;
+  --color-cancelled-text: #475569;
+  --color-active-bg: #d1fae5;
+  --color-active-text: #065f46;
+  --color-inactive-bg: #f1f5f9;
+  --color-inactive-text: #64748b;
+  --color-archived-bg: #e4e2e4;
+  --color-archived-text: #76777d;
+
+  /* ── Border Radius ── */
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-card: 0px 4px 20px rgba(15, 23, 42, 0.05);
+  --shadow-card-hover: 0px 8px 30px rgba(15, 23, 42, 0.1);
+  --shadow-modal: 0 20px 60px rgba(15, 23, 42, 0.15);
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--color-on-surface);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-surface-container); }
+::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-outline); }
+
+/* ─── Focus ──────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--color-secondary-container);
+  color: var(--color-secondary);
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInDown {
+  from { transform: translateY(-10px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in { animation: fadeIn 0.3s ease forwards; }
+.animate-skeleton { animation: skeleton-pulse 1.5s ease-in-out infinite; }
+.animate-spin { animation: spin 1s linear infinite; }
+.animate-slide-right { animation: slideInRight 0.3s ease forwards; }
+.animate-slide-down { animation: slideInDown 0.2s ease forwards; }
