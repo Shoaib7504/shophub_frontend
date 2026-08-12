@@ -1,26 +1,26 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// Protected routes: require authentication
+// Pages that need you to be logged in
 const PROTECTED_PREFIXES = ["/profile", "/cart", "/checkout", "/orders"];
-// Admin routes: require ADMIN role (checked client-side too in the layout)
+// Admin pages. The role check runs again in the admin layout.
 const ADMIN_PREFIXES = ["/admin"];
-// Auth routes: redirect to home if already logged in
+// Visiting these while logged in just sends you home
 const AUTH_ROUTES = ["/login", "/register"];
 
-// Cookie name mirrored from src/lib/auth.ts
+// Same cookie name as the one set in src/lib/auth.ts
 const COOKIE_NAME = "auth-token";
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get(COOKIE_NAME)?.value;
 
-  // Redirect authenticated users away from login/register
+  // Logged in? Skip the login/register page
   if (AUTH_ROUTES.some((r) => pathname.startsWith(r)) && token) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // Redirect unauthenticated users away from protected routes
+  // Not logged in? Send them to the login page
   const isProtected =
     PROTECTED_PREFIXES.some((r) => pathname.startsWith(r)) ||
     ADMIN_PREFIXES.some((r) => pathname.startsWith(r));

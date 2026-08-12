@@ -1,11 +1,6 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// JWT Token helpers
-// NOTE: Currently using localStorage for simplicity.
-// To migrate to HTTP-only cookies, replace these helpers with
-// server-side cookie reads (e.g., via Next.js Route Handlers) and
-// remove NEXT_PUBLIC_ exposure of the token.
-// For middleware access, the token is also mirrored to a client cookie "auth-token".
-// ─────────────────────────────────────────────────────────────────────────────
+// JWT helpers.
+// We keep the token in localStorage, and also put a copy in a cookie so the
+// proxy (Next.js middleware) can read it server-side.
 
 const TOKEN_KEY = "shophub_token";
 const COOKIE_NAME = "auth-token";
@@ -22,14 +17,14 @@ export function getToken(): string | null {
 export function setToken(token: string): void {
   if (!isClient()) return;
   localStorage.setItem(TOKEN_KEY, token);
-  // Mirror to cookie so Next.js middleware (Edge) can read it
+  // Also save it to a cookie so the proxy can see it
   document.cookie = `${COOKIE_NAME}=${token}; path=/; SameSite=Lax`;
 }
 
 export function removeToken(): void {
   if (!isClient()) return;
   localStorage.removeItem(TOKEN_KEY);
-  // Clear the middleware cookie too
+  // Remove the cookie too
   document.cookie = `${COOKIE_NAME}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
 }
 
@@ -39,7 +34,7 @@ export function getCookieToken(): string | null {
   return match ? match[1] : null;
 }
 
-// Decode JWT payload WITHOUT verification (verification is the backend's job)
+// Decode the token payload without checking the signature. The server does that.
 export function decodeToken(token: string): Record<string, unknown> | null {
   try {
     const payload = token.split(".")[1];

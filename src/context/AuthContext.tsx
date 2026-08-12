@@ -29,8 +29,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   });
   const [isLoading, setIsLoading] = useState(() => !!token);
 
-  // Fetch the full user profile whenever a token is present.
-  // The JWT payload only carries { id, role } — name/email come from /auth/me.
+  // When we have a token, go get the user's name/email from the server.
+  // The token itself only holds { id, role }.
   useEffect(() => {
     if (!token) return;
 

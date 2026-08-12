@@ -114,8 +114,8 @@ export default function AdminProductsPage() {
     <div className="space-y-6 max-w-6xl">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">Products</h1>
-          <p className="text-sm text-[#76777d]">{data?.total ?? 0} products total</p>
+          <h1 className="text-2xl font-bold text-primary font-display">Products</h1>
+          <p className="text-sm text-on-surface-muted">{data?.total ?? 0} products total</p>
         </div>
         <Button onClick={() => { setEditProduct(undefined); setModalOpen(true); }}>
           <Plus size={16} /> Add Product
@@ -123,7 +123,7 @@ export default function AdminProductsPage() {
       </div>
 
       <div className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] overflow-hidden">
-        <div className="p-4 border-b border-[#eae7e9]">
+        <div className="p-4 border-b border-surface-high">
           <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1); }} placeholder="Search products…" className="max-w-sm" />
         </div>
 
@@ -137,16 +137,16 @@ export default function AdminProductsPage() {
           ) : (
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-[#f6f3f5] text-left">
+                <tr className="bg-surface-low text-left">
                   {["Title","Category","Price","Stock","Status","Created","Actions"].map((h) => (
-                    <th key={h} className="px-5 py-3 text-xs font-semibold text-[#76777d] uppercase tracking-wide whitespace-nowrap">{h}</th>
+                    <th key={h} className="px-5 py-3 text-xs font-semibold text-on-surface-muted uppercase tracking-wide whitespace-nowrap">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#f0edef]">
                 {data.products.map((p) => (
                   <tr key={p.id} className="hover:bg-[#f9f7f8] transition-colors">
-                    <td className="px-5 py-3 font-medium text-[#1b1b1d] max-w-xs truncate">
+                    <td className="px-5 py-3 font-medium text-on-surface max-w-xs truncate">
                       <div className="flex items-center gap-3">
                         {p.image ? (
                           // eslint-disable-next-line @next/next/no-img-element -- remote supabase image
@@ -157,17 +157,17 @@ export default function AdminProductsPage() {
                         <span className="truncate">{p.title}</span>
                       </div>
                     </td>
-                    <td className="px-5 py-3 text-[#76777d]">{p.category?.name ?? "—"}</td>
-                    <td className="px-5 py-3 font-bold text-[#0f172a] font-[family-name:var(--font-geist)] whitespace-nowrap">{formatPrice(p.price)}</td>
-                    <td className="px-5 py-3 text-[#45464d]">{p.stock}</td>
+                    <td className="px-5 py-3 text-on-surface-muted">{p.category?.name ?? "—"}</td>
+                    <td className="px-5 py-3 font-bold text-primary font-display whitespace-nowrap">{formatPrice(p.price)}</td>
+                    <td className="px-5 py-3 text-on-surface-variant">{p.stock}</td>
                     <td className="px-5 py-3"><StatusBadge status={p.status} /></td>
-                    <td className="px-5 py-3 text-[#76777d] whitespace-nowrap">{formatDate(p.createdAt)}</td>
+                    <td className="px-5 py-3 text-on-surface-muted whitespace-nowrap">{formatDate(p.createdAt)}</td>
                     <td className="px-5 py-3">
                       <div className="flex items-center gap-1.5">
-                        <button onClick={() => { setEditProduct(p); setModalOpen(true); }} className="p-1.5 text-[#45464d] hover:bg-[#f0edef] hover:text-[#0f172a] rounded-lg transition-all" aria-label="Edit">
+                        <button onClick={() => { setEditProduct(p); setModalOpen(true); }} className="p-1.5 text-on-surface-variant hover:bg-surface-container hover:text-primary rounded-lg transition-all" aria-label="Edit">
                           <Pencil size={14} />
                         </button>
-                        <button onClick={() => setDeleteId(p.id)} className="p-1.5 text-[#76777d] hover:bg-[#ffdad6] hover:text-[#ba1a1a] rounded-lg transition-all" aria-label="Delete">
+                        <button onClick={() => setDeleteId(p.id)} className="p-1.5 text-on-surface-muted hover:bg-error-container hover:text-error rounded-lg transition-all" aria-label="Delete">
                           <Trash2 size={14} />
                         </button>
                       </div>
@@ -180,7 +180,7 @@ export default function AdminProductsPage() {
         </div>
 
         {(data?.total ?? 0) > LIMIT && (
-          <div className="p-4 border-t border-[#eae7e9]">
+          <div className="p-4 border-t border-surface-high">
             <Pagination page={page} total={data?.total ?? 0} limit={LIMIT} onChange={setPage} />
           </div>
         )}

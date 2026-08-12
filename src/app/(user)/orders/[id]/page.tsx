@@ -19,8 +19,8 @@ function OrderTimeline({ status }: { status: OrderStatus }) {
   return (
     <div className="relative">
       {cancelled ? (
-        <div className="flex items-center gap-2 p-4 bg-[#ffdad6] rounded-xl">
-          <span className="text-sm font-medium text-[#ba1a1a]">This order was cancelled.</span>
+        <div className="flex items-center gap-2 p-4 bg-error-container rounded-xl">
+          <span className="text-sm font-medium text-error">This order was cancelled.</span>
         </div>
       ) : (
         <div className="flex items-center gap-0">
@@ -34,21 +34,21 @@ function OrderTimeline({ status }: { status: OrderStatus }) {
                     className={cn(
                       "w-8 h-8 rounded-full flex items-center justify-center border-2 transition-colors",
                       done
-                        ? "bg-[#006c49] border-[#006c49]"
-                        : "bg-white border-[#c6c6cd]",
-                      active && "ring-4 ring-[#006c49]/20"
+                        ? "bg-secondary border-secondary"
+                        : "bg-white border-outline-variant",
+                      active && "ring-4 ring-secondary/20"
                     )}
                   >
                     {done ? (
                       <CheckCircle size={16} className="text-white" />
                     ) : (
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#c6c6cd]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-outline-variant" />
                     )}
                   </div>
                   <p
                     className={cn(
                       "text-xs font-medium text-center whitespace-nowrap",
-                      done ? "text-[#006c49]" : "text-[#76777d]"
+                      done ? "text-secondary" : "text-on-surface-muted"
                     )}
                   >
                     {step.charAt(0) + step.slice(1).toLowerCase()}
@@ -58,7 +58,7 @@ function OrderTimeline({ status }: { status: OrderStatus }) {
                   <div
                     className={cn(
                       "flex-1 h-0.5 mx-2 mb-5",
-                      i < currentIdx ? "bg-[#006c49]" : "bg-[#c6c6cd]"
+                      i < currentIdx ? "bg-secondary" : "bg-outline-variant"
                     )}
                   />
                 )}
@@ -91,32 +91,32 @@ export default function OrderDetailPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-10 space-y-6">
-      {/* Header */}
+      {/* Order number and status */}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="text-3xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">
+          <h1 className="text-3xl font-bold text-primary font-display">
             Order Details
           </h1>
-          <p className="text-sm font-mono text-[#76777d] mt-1">
+          <p className="text-sm font-mono text-on-surface-muted mt-1">
             #{order.id.toUpperCase()}
           </p>
         </div>
         <OrderStatusBadge status={order.status} />
       </div>
 
-      <p className="text-sm text-[#76777d]">Placed on {formatDate(order.createdAt)}</p>
+      <p className="text-sm text-on-surface-muted">Placed on {formatDate(order.createdAt)}</p>
 
-      {/* Timeline */}
+      {/* Delivery progress timeline */}
       <div className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] p-6">
-        <h2 className="font-bold text-[#1b1b1d] font-[family-name:var(--font-geist)] mb-5">
+        <h2 className="font-bold text-on-surface font-display mb-5">
           Order Status
         </h2>
         <OrderTimeline status={order.status} />
       </div>
 
-      {/* Items */}
+      {/* Bought items */}
       <div className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] p-6">
-        <h2 className="font-bold text-[#1b1b1d] font-[family-name:var(--font-geist)] mb-5">
+        <h2 className="font-bold text-on-surface font-display mb-5">
           Items ({order.orderItems?.length ?? 0})
         </h2>
         <div className="divide-y divide-[#f0edef]">
@@ -129,26 +129,26 @@ export default function OrderDetailPage() {
                 <Package size={18} className="text-white/60" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-[#1b1b1d] line-clamp-1">
+                <p className="text-sm font-medium text-on-surface line-clamp-1">
                   {item.product?.title ?? `Product ${item.productId.slice(0, 6)}`}
                 </p>
-                <p className="text-xs text-[#76777d]">
+                <p className="text-xs text-on-surface-muted">
                   {formatPrice(item.price)} × {item.quantity}
                 </p>
               </div>
-              <p className="text-sm font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">
+              <p className="text-sm font-bold text-primary font-display">
                 {formatPrice(item.price * item.quantity)}
               </p>
             </div>
           ))}
         </div>
 
-        {/* Total */}
-        <div className="pt-4 border-t border-[#eae7e9] mt-2 flex justify-between items-center">
-          <span className="font-bold text-[#1b1b1d] font-[family-name:var(--font-geist)]">
+        {/* Grand total */}
+        <div className="pt-4 border-t border-surface-high mt-2 flex justify-between items-center">
+          <span className="font-bold text-on-surface font-display">
             Order Total
           </span>
-          <span className="text-xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">
+          <span className="text-xl font-bold text-primary font-display">
             {formatPrice(order.total)}
           </span>
         </div>

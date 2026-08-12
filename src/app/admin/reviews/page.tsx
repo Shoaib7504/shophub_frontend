@@ -23,8 +23,8 @@ export default function AdminReviewsPage() {
   return (
     <div className="space-y-6 max-w-6xl">
       <div>
-        <h1 className="text-2xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">Reviews</h1>
-        <p className="text-sm text-[#76777d]">{data?.total ?? 0} reviews total</p>
+        <h1 className="text-2xl font-bold text-primary font-display">Reviews</h1>
+        <p className="text-sm text-on-surface-muted">{data?.total ?? 0} reviews total</p>
       </div>
 
       <div className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] overflow-hidden">
@@ -35,22 +35,22 @@ export default function AdminReviewsPage() {
             : (
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-[#f6f3f5] text-left">
+                  <tr className="bg-surface-low text-left">
                     {["Reviewer","Product","Rating","Comment","Date","Actions"].map((h) => (
-                      <th key={h} className="px-5 py-3 text-xs font-semibold text-[#76777d] uppercase tracking-wide">{h}</th>
+                      <th key={h} className="px-5 py-3 text-xs font-semibold text-on-surface-muted uppercase tracking-wide">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#f0edef]">
                   {data?.reviews.map((r) => (
                     <tr key={r.id} className="hover:bg-[#f9f7f8] transition-colors">
-                      <td className="px-5 py-3 font-semibold text-[#1b1b1d]">{r.user?.name ?? "—"}</td>
-                      <td className="px-5 py-3 text-[#45464d] max-w-xs truncate">{r.product?.title ?? "—"}</td>
+                      <td className="px-5 py-3 font-semibold text-on-surface">{r.user?.name ?? "—"}</td>
+                      <td className="px-5 py-3 text-on-surface-variant max-w-xs truncate">{r.product?.title ?? "—"}</td>
                       <td className="px-5 py-3"><RatingStars rating={r.rating} size={14} /></td>
-                      <td className="px-5 py-3 text-[#76777d] max-w-xs truncate">{r.comment ?? "—"}</td>
-                      <td className="px-5 py-3 text-[#76777d] whitespace-nowrap">{formatDate(r.createdAt)}</td>
+                      <td className="px-5 py-3 text-on-surface-muted max-w-xs truncate">{r.comment ?? "—"}</td>
+                      <td className="px-5 py-3 text-on-surface-muted whitespace-nowrap">{formatDate(r.createdAt)}</td>
                       <td className="px-5 py-3">
-                        <button onClick={() => setDeleteId(r.id)} className="p-1.5 text-[#76777d] hover:bg-[#ffdad6] hover:text-[#ba1a1a] rounded-lg transition-all"><Trash2 size={14} /></button>
+                        <button onClick={() => setDeleteId(r.id)} className="p-1.5 text-on-surface-muted hover:bg-error-container hover:text-error rounded-lg transition-all"><Trash2 size={14} /></button>
                       </td>
                     </tr>
                   ))}
@@ -59,7 +59,7 @@ export default function AdminReviewsPage() {
             )}
         </div>
         {(data?.total ?? 0) > LIMIT && (
-          <div className="p-4 border-t border-[#eae7e9]">
+          <div className="p-4 border-t border-surface-high">
             <Pagination page={page} total={data?.total ?? 0} limit={LIMIT} onChange={setPage} />
           </div>
         )}

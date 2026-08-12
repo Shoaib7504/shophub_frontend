@@ -8,8 +8,8 @@
 
 @theme inline {
   /* ── Typography ── */
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-display: "Geist", "Inter", system-ui, sans-serif;
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-geist);
   --font-mono: "JetBrains Mono", monospace;
 
   /* ── Brand Colors ── */
@@ -21,6 +21,7 @@
   --color-secondary-hover: #00503a;
   --color-secondary-container: #6cf8bb;
   --color-on-secondary: #ffffff;
+  --color-mint: #4edea3;
 
   /* ── Surface Scale ── */
   --color-background: #fcf8fa;

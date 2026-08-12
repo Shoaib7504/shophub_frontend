@@ -25,22 +25,22 @@ const brands = [
 ];
 
 export default function BrandSlider() {
-  // Duplicate array for seamless infinite marquee loop
+  // Repeat the list a few times so the marquee never runs out of items
   const marqueeBrands = [...brands, ...brands, ...brands];
 
   return (
-    <section className="py-10 bg-white border-y border-[#eae7e9] overflow-hidden select-none">
+    <section className="py-10 bg-white border-y border-surface-high overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-6 mb-6 flex items-center justify-between">
-        <p className="text-xs font-semibold uppercase tracking-widest text-[#76777d] font-[family-name:var(--font-geist)]">
+        <p className="text-xs font-semibold uppercase tracking-widest text-on-surface-muted font-display">
           Trusted Brand Partners
         </p>
-        <span className="text-xs text-[#006c49] font-medium hidden sm:inline-block font-[family-name:var(--font-geist)]">
+        <span className="text-xs text-secondary font-medium hidden sm:inline-block font-display">
           100% Authentic Products
         </span>
       </div>
 
       <div className="relative w-full overflow-hidden flex">
-        {/* Left & Right gradient fade masks */}
+        {/* Fade the edges of the marquee */}
         <div className="absolute top-0 left-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
         <div className="absolute top-0 right-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
@@ -58,16 +58,16 @@ export default function BrandSlider() {
             return (
               <div
                 key={`${brand.name}-${index}`}
-                className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-[#fcf8fa] border border-[#f0edef] hover:border-[#006c49]/30 hover:bg-[#d1fae5]/30 hover:shadow-md transition-all duration-300 group cursor-default"
+                className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-background border border-surface-container hover:border-secondary/30 hover:bg-delivered-bg/30 hover:shadow-md transition-all duration-300 group cursor-default"
               >
-                <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-[#0f172a] shadow-sm group-hover:bg-[#006c49] group-hover:text-white transition-colors duration-300">
+                <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-primary shadow-sm group-hover:bg-secondary group-hover:text-white transition-colors duration-300">
                   <Icon size={16} />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-[#0f172a] font-[family-name:var(--font-geist)] group-hover:text-[#006c49] transition-colors">
+                  <p className="text-sm font-bold text-primary font-display group-hover:text-secondary transition-colors">
                     {brand.name}
                   </p>
-                  <p className="text-[10px] text-[#76777d] uppercase tracking-wider">
+                  <p className="text-[10px] text-on-surface-muted uppercase tracking-wider">
                     {brand.category}
                   </p>
                 </div>

@@ -18,7 +18,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label
             htmlFor={id}
-            className="text-sm font-medium text-[#1b1b1d] font-[family-name:var(--font-geist)]"
+            className="text-sm font-medium text-on-surface font-display"
           >
             {label}
           </label>
@@ -28,12 +28,12 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             ref={ref}
             id={id}
             className={cn(
-              "w-full h-10 rounded-xl border bg-white px-3 pr-9 text-sm text-[#1b1b1d] appearance-none cursor-pointer",
+              "w-full h-10 rounded-xl border bg-white px-3 pr-9 text-sm text-on-surface appearance-none cursor-pointer",
               "transition-all duration-200 outline-none",
-              "focus:border-[#006c49] focus:ring-2 focus:ring-[#006c49]/20",
+              "focus:border-secondary focus:ring-2 focus:ring-secondary/20",
               error
-                ? "border-[#ba1a1a]"
-                : "border-[#c6c6cd]",
+                ? "border-error"
+                : "border-outline-variant",
               className
             )}
             {...props}
@@ -51,10 +51,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </select>
           <ChevronDown
             size={16}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#76777d] pointer-events-none"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-muted pointer-events-none"
           />
         </div>
-        {error && <p className="text-xs text-[#ba1a1a]" role="alert">{error}</p>}
+        {error && <p className="text-xs text-error" role="alert">{error}</p>}
       </div>
     );
   }

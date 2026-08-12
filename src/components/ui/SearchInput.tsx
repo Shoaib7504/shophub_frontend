@@ -23,7 +23,7 @@ export default function SearchInput({
   const [lastValue, setLastValue] = useState(value);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Sync with the external value when it changes (adjusted during render)
+  // If the parent changed the value, show it in the input too
   if (lastValue !== value) {
     setLastValue(value);
     setLocalValue(value);
@@ -39,7 +39,7 @@ export default function SearchInput({
     <div className={cn("relative flex items-center", className)}>
       <Search
         size={16}
-        className="absolute left-3 text-[#76777d] pointer-events-none"
+        className="absolute left-3 text-on-surface-muted pointer-events-none"
       />
       <input
         type="search"
@@ -47,17 +47,17 @@ export default function SearchInput({
         onChange={(e) => handleChange(e.target.value)}
         placeholder={placeholder}
         className={cn(
-          "w-full h-10 pl-9 pr-9 rounded-xl border border-[#c6c6cd] bg-white",
-          "text-sm text-[#1b1b1d] placeholder:text-[#76777d]",
+          "w-full h-10 pl-9 pr-9 rounded-xl border border-outline-variant bg-white",
+          "text-sm text-on-surface placeholder:text-on-surface-muted",
           "outline-none transition-all duration-200",
-          "focus:border-[#006c49] focus:ring-2 focus:ring-[#006c49]/20"
+          "focus:border-secondary focus:ring-2 focus:ring-secondary/20"
         )}
       />
       {localValue && (
         <button
           type="button"
           onClick={() => handleChange("")}
-          className="absolute right-3 text-[#76777d] hover:text-[#1b1b1d] transition-colors"
+          className="absolute right-3 text-on-surface-muted hover:text-on-surface transition-colors"
           aria-label="Clear search"
         >
           <X size={16} />

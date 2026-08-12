@@ -68,9 +68,9 @@ export default function ProductDetailPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
-      {/* Product */}
+      {/* Image + info side by side */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-        {/* Image */}
+        {/* Product photo */}
         {product.image ? (
           // eslint-disable-next-line @next/next/no-img-element -- remote product image
           <img
@@ -87,55 +87,55 @@ export default function ProductDetailPage() {
           </div>
         )}
 
-        {/* Info */}
+        {/* Name, price, description… */}
         <div className="space-y-5">
           {product.category && (
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#006c49] font-[family-name:var(--font-geist)]">
+            <span className="text-xs font-semibold uppercase tracking-widest text-secondary font-display">
               {product.category.name}
             </span>
           )}
 
-          <h1 className="text-3xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)] leading-tight">
+          <h1 className="text-3xl font-bold text-primary font-display leading-tight">
             {product.title}
           </h1>
 
           <div className="flex items-center gap-3">
             <RatingStars rating={product.averageRating ?? 0} size={18} />
-            <span className="text-sm text-[#76777d]">{product._count?.reviews ?? 0} reviews</span>
+            <span className="text-sm text-on-surface-muted">{product._count?.reviews ?? 0} reviews</span>
             <StatusBadge status={product.status} />
           </div>
 
-          <div className="text-3xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">
+          <div className="text-3xl font-bold text-primary font-display">
             {formatPrice(product.price)}
           </div>
 
           {product.description && (
-            <p className="text-[#45464d] leading-relaxed text-sm">{product.description}</p>
+            <p className="text-on-surface-variant leading-relaxed text-sm">{product.description}</p>
           )}
 
-          <div className="flex items-center gap-2 text-sm text-[#76777d]">
-            <span className={product.stock > 0 ? "text-[#065f46]" : "text-[#ba1a1a]"}>
+          <div className="flex items-center gap-2 text-sm text-on-surface-muted">
+            <span className={product.stock > 0 ? "text-delivered-text" : "text-error"}>
               ● {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
             </span>
           </div>
 
-          {/* Quantity + Cart */}
+          {/* Quantity picker + add to cart */}
           {!outOfStock && (
             <div className="flex items-center gap-3">
-              <div className="flex items-center border border-[#c6c6cd] rounded-xl overflow-hidden">
+              <div className="flex items-center border border-outline-variant rounded-xl overflow-hidden">
                 <button
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
-                  className="px-3 py-2.5 text-[#45464d] hover:bg-[#f0edef] transition-colors"
+                  className="px-3 py-2.5 text-on-surface-variant hover:bg-surface-container transition-colors"
                   aria-label="Decrease quantity"
                 >
                   <Minus size={14} />
                 </button>
-                <span className="w-10 text-center text-sm font-medium text-[#1b1b1d] font-[family-name:var(--font-geist)]">
+                <span className="w-10 text-center text-sm font-medium text-on-surface font-display">
                   {qty}
                 </span>
                 <button
                   onClick={() => setQty((q) => Math.min(product.stock, q + 1))}
-                  className="px-3 py-2.5 text-[#45464d] hover:bg-[#f0edef] transition-colors"
+                  className="px-3 py-2.5 text-on-surface-variant hover:bg-surface-container transition-colors"
                   aria-label="Increase quantity"
                 >
                   <Plus size={14} />
@@ -149,25 +149,25 @@ export default function ProductDetailPage() {
           )}
 
           {outOfStock && (
-            <div className="w-full py-3 text-center rounded-xl bg-[#f1f5f9] text-[#64748b] text-sm font-medium">
+            <div className="w-full py-3 text-center rounded-xl bg-cancelled-bg text-inactive-text text-sm font-medium">
               Out of Stock
             </div>
           )}
         </div>
       </div>
 
-      {/* Reviews */}
-      <div className="border-t border-[#eae7e9] pt-12">
-        <h2 className="text-xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)] mb-8">
+      {/* Reviews section */}
+      <div className="border-t border-surface-high pt-12">
+        <h2 className="text-xl font-bold text-primary font-display mb-8">
           Customer Reviews ({reviews?.length ?? 0})
         </h2>
 
-        {/* Write a review */}
+        {/* Leave a review form */}
         {isAuthenticated ? (
           <form onSubmit={handleReviewSubmit} className="bg-white rounded-2xl p-6 shadow-[0px_4px_20px_rgba(15,23,42,0.05)] mb-8 space-y-4">
-            <h3 className="font-semibold text-[#1b1b1d] font-[family-name:var(--font-geist)]">Write a Review</h3>
+            <h3 className="font-semibold text-on-surface font-display">Write a Review</h3>
             <div>
-              <label className="text-sm font-medium text-[#1b1b1d] mb-2 block">Your Rating</label>
+              <label className="text-sm font-medium text-on-surface mb-2 block">Your Rating</label>
               <RatingStars rating={rating} interactive onChange={setRating} size={24} />
             </div>
             <Textarea
@@ -179,14 +179,14 @@ export default function ProductDetailPage() {
             <Button type="submit" loading={createReview.isPending}>Submit Review</Button>
           </form>
         ) : (
-          <div className="bg-[#f6f3f5] rounded-2xl p-6 mb-8 text-center">
-            <p className="text-sm text-[#45464d]">
-              Please <a href="/login" className="text-[#006c49] font-medium hover:underline">log in</a> to write a review.
+          <div className="bg-surface-low rounded-2xl p-6 mb-8 text-center">
+            <p className="text-sm text-on-surface-variant">
+              Please <a href="/login" className="text-secondary font-medium hover:underline">log in</a> to write a review.
             </p>
           </div>
         )}
 
-        {/* Reviews List */}
+        {/* Existing reviews */}
         {reviewsLoading ? (
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
@@ -201,18 +201,18 @@ export default function ProductDetailPage() {
               <div key={review.id} className="bg-white rounded-2xl p-6 shadow-[0px_4px_20px_rgba(15,23,42,0.05)]">
                 <div className="flex items-start justify-between gap-4 mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-[#0f172a] flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                       <User size={14} className="text-white" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-[#1b1b1d]">{review.user?.name ?? "Anonymous"}</p>
-                      <p className="text-xs text-[#76777d]">{formatDate(review.createdAt)}</p>
+                      <p className="text-sm font-semibold text-on-surface">{review.user?.name ?? "Anonymous"}</p>
+                      <p className="text-xs text-on-surface-muted">{formatDate(review.createdAt)}</p>
                     </div>
                   </div>
                   <RatingStars rating={review.rating} size={14} />
                 </div>
                 {review.comment && (
-                  <p className="text-sm text-[#45464d] leading-relaxed">{review.comment}</p>
+                  <p className="text-sm text-on-surface-variant leading-relaxed">{review.comment}</p>
                 )}
               </div>
             ))}

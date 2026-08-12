@@ -1,4 +1,4 @@
-// Server Component: fetches featured products for the homepage
+// Server component, grabs the featured products for the homepage
 import { unstable_cache } from "next/cache";
 import ProductCard from "@/components/product/ProductCard";
 import EmptyState from "@/components/ui/EmptyState";
@@ -19,7 +19,7 @@ export default async function HomeFeaturedProducts() {
   try {
     products = await getFeaturedProducts();
   } catch {
-    // Backend might not be running during dev — show placeholder
+    // No backend running? Just show an empty state instead of crashing
     products = [];
   }
 

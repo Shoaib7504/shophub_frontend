@@ -28,7 +28,7 @@ export const productService = {
     return extractData<Product>(res);
   },
 
-  // Soft delete — backend uses isDeleted flag
+  // The backend doesn't delete the row, it just marks it as deleted
   async deleteProduct(id: string): Promise<void> {
     await apiClient.delete(`/products/${id}`);
   },

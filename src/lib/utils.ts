@@ -15,7 +15,7 @@ export function formatPrice(amount: number, currency = "USD"): string {
   }).format(amount);
 }
 
-/** Format an ISO date string to readable form */
+/** Turn an ISO date string into something readable */
 export function formatDate(dateStr: string): string {
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -24,7 +24,7 @@ export function formatDate(dateStr: string): string {
   }).format(new Date(dateStr));
 }
 
-/** Format an ISO date string with time */
+/** Same as formatDate but with the time too */
 export function formatDateTime(dateStr: string): string {
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -41,7 +41,7 @@ export function truncate(str: string, maxLen: number): string {
   return str.slice(0, maxLen).trimEnd() + "…";
 }
 
-/** Generate a random gradient color based on a seed string (for product placeholders) */
+/** Pick a gradient color from a string (used for product image placeholders) */
 export function stringToGradient(seed: string): string {
   let hash = 0;
   for (let i = 0; i < seed.length; i++) {

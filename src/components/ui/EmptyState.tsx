@@ -34,15 +34,15 @@ export default function EmptyState({
 
   return (
     <div className="flex flex-col items-center justify-center text-center py-16 px-4 gap-4">
-      <div className="w-16 h-16 rounded-2xl bg-[#f0edef] flex items-center justify-center">
-        {customIcon ?? <Icon size={28} className="text-[#76777d]" />}
+      <div className="w-16 h-16 rounded-2xl bg-surface-container flex items-center justify-center">
+        {customIcon ?? <Icon size={28} className="text-on-surface-muted" />}
       </div>
       <div className="space-y-1.5 max-w-xs">
-        <p className="text-base font-semibold text-[#1b1b1d] font-[family-name:var(--font-geist)]">
+        <p className="text-base font-semibold text-on-surface font-display">
           {title}
         </p>
         {description && (
-          <p className="text-sm text-[#76777d]">{description}</p>
+          <p className="text-sm text-on-surface-muted">{description}</p>
         )}
       </div>
       {action && (

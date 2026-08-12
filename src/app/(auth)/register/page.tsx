@@ -49,10 +49,10 @@ export default function RegisterPage() {
   return (
     <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">
+        <h1 className="text-2xl font-bold text-primary font-display">
           Create account
         </h1>
-        <p className="text-sm text-[#76777d] mt-1">
+        <p className="text-sm text-on-surface-muted mt-1">
           Join ShopHub and start shopping today
         </p>
       </div>
@@ -113,12 +113,12 @@ export default function RegisterPage() {
         </Button>
       </form>
 
-      <div className="mt-6 text-center border-t border-[#f0edef] pt-6">
-        <p className="text-sm text-[#76777d]">
+      <div className="mt-6 text-center border-t border-surface-container pt-6">
+        <p className="text-sm text-on-surface-muted">
           Already have an account?{" "}
           <Link
             href="/login"
-            className="font-medium text-[#006c49] hover:underline"
+            className="font-medium text-secondary hover:underline"
           >
             Sign in
           </Link>

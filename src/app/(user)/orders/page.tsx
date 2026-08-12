@@ -16,10 +16,10 @@ export default function OrdersPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)] mb-2">
+      <h1 className="text-3xl font-bold text-primary font-display mb-2">
         My Orders
       </h1>
-      <p className="text-[#76777d] mb-8">
+      <p className="text-on-surface-muted mb-8">
         {data ? `${data.orders.length} order${data.orders.length !== 1 ? "s" : ""} total` : " "}
       </p>
 
@@ -45,28 +45,28 @@ export default function OrdersPage() {
               <div className="flex items-start justify-between gap-4 mb-3">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <Package size={15} className="text-[#76777d]" />
-                    <p className="text-xs font-mono text-[#76777d]">
+                    <Package size={15} className="text-on-surface-muted" />
+                    <p className="text-xs font-mono text-on-surface-muted">
                       #{order.id.slice(0, 8).toUpperCase()}
                     </p>
                   </div>
-                  <p className="text-xs text-[#76777d]">{formatDate(order.createdAt)}</p>
+                  <p className="text-xs text-on-surface-muted">{formatDate(order.createdAt)}</p>
                 </div>
                 <OrderStatusBadge status={order.status} />
               </div>
 
-              <div className="flex items-center justify-between pt-3 border-t border-[#f0edef]">
+              <div className="flex items-center justify-between pt-3 border-t border-surface-container">
                 <div>
-                  <p className="text-xs text-[#76777d]">
+                  <p className="text-xs text-on-surface-muted">
                     {order.orderItems?.length ?? 0} items
                   </p>
-                  <p className="text-base font-bold text-[#0f172a] font-[family-name:var(--font-geist)] mt-0.5">
+                  <p className="text-base font-bold text-primary font-display mt-0.5">
                     {formatPrice(order.total)}
                   </p>
                 </div>
                 <Link
                   href={`/orders/${order.id}`}
-                  className="flex items-center gap-1.5 text-sm font-medium text-[#0f172a] hover:text-[#006c49] transition-colors"
+                  className="flex items-center gap-1.5 text-sm font-medium text-primary hover:text-secondary transition-colors"
                 >
                   View Details <ArrowRight size={14} />
                 </Link>

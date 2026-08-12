@@ -39,39 +39,39 @@ function OrderDetailModal({ order, onClose }: { order: Order; onClose: () => voi
       <div className="space-y-5">
         <div className="flex flex-wrap gap-4">
           <div className="flex-1">
-            <p className="text-xs text-[#76777d] mb-0.5">Customer</p>
-            <p className="text-sm font-semibold text-[#1b1b1d]">{order.user?.name ?? "—"}</p>
-            <p className="text-xs text-[#76777d]">{order.user?.email ?? ""}</p>
+            <p className="text-xs text-on-surface-muted mb-0.5">Customer</p>
+            <p className="text-sm font-semibold text-on-surface">{order.user?.name ?? "—"}</p>
+            <p className="text-xs text-on-surface-muted">{order.user?.email ?? ""}</p>
           </div>
           <div>
-            <p className="text-xs text-[#76777d] mb-0.5">Date</p>
-            <p className="text-sm font-medium text-[#1b1b1d]">{formatDate(order.createdAt)}</p>
+            <p className="text-xs text-on-surface-muted mb-0.5">Date</p>
+            <p className="text-sm font-medium text-on-surface">{formatDate(order.createdAt)}</p>
           </div>
         </div>
 
-        <div className="divide-y divide-[#f0edef] border border-[#eae7e9] rounded-xl overflow-hidden">
+        <div className="divide-y divide-[#f0edef] border border-surface-high rounded-xl overflow-hidden">
           {order.orderItems?.map((item) => (
             <div key={item.id} className="flex items-center gap-3 p-3">
               <div className="w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center" style={{ background: stringToGradient(item.productId) }}>
                 <Package size={16} className="text-white/60" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-[#1b1b1d] truncate">{item.product?.title ?? item.productId.slice(0, 12)}</p>
-                <p className="text-xs text-[#76777d]">{formatPrice(item.price)} × {item.quantity}</p>
+                <p className="text-sm font-medium text-on-surface truncate">{item.product?.title ?? item.productId.slice(0, 12)}</p>
+                <p className="text-xs text-on-surface-muted">{formatPrice(item.price)} × {item.quantity}</p>
               </div>
-              <p className="text-sm font-bold text-[#0f172a]">{formatPrice(item.price * item.quantity)}</p>
+              <p className="text-sm font-bold text-primary">{formatPrice(item.price * item.quantity)}</p>
             </div>
           ))}
         </div>
 
-        <div className="flex items-center justify-between py-3 border-t border-[#eae7e9]">
-          <span className="font-bold text-[#1b1b1d]">Total</span>
-          <span className="text-xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">{formatPrice(order.total)}</span>
+        <div className="flex items-center justify-between py-3 border-t border-surface-high">
+          <span className="font-bold text-on-surface">Total</span>
+          <span className="text-xl font-bold text-primary font-display">{formatPrice(order.total)}</span>
         </div>
 
-        {/* Update Status */}
-        <div className="pt-3 border-t border-[#eae7e9]">
-          <p className="text-sm font-medium text-[#1b1b1d] mb-2">Update Status</p>
+        {/* Change the order status */}
+        <div className="pt-3 border-t border-surface-high">
+          <p className="text-sm font-medium text-on-surface mb-2">Update Status</p>
           <div className="flex gap-3">
             <Select
               value={newStatus}
@@ -97,12 +97,12 @@ export default function AdminOrdersPage() {
   return (
     <div className="space-y-6 max-w-6xl">
       <div>
-        <h1 className="text-2xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">Orders</h1>
-        <p className="text-sm text-[#76777d]">{data?.total ?? 0} orders total</p>
+        <h1 className="text-2xl font-bold text-primary font-display">Orders</h1>
+        <p className="text-sm text-on-surface-muted">{data?.total ?? 0} orders total</p>
       </div>
 
       <div className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] overflow-hidden">
-        <div className="p-4 border-b border-[#eae7e9]">
+        <div className="p-4 border-b border-surface-high">
           <Select value={status} onChange={(e) => { setStatus(e.target.value); setPage(1); }} options={STATUS_OPTIONS} className="w-44" />
         </div>
         <div className="overflow-x-auto">
@@ -112,22 +112,22 @@ export default function AdminOrdersPage() {
             : (
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-[#f6f3f5] text-left">
+                  <tr className="bg-surface-low text-left">
                     {["Order ID","Customer","Total","Status","Date","Actions"].map((h) => (
-                      <th key={h} className="px-5 py-3 text-xs font-semibold text-[#76777d] uppercase tracking-wide whitespace-nowrap">{h}</th>
+                      <th key={h} className="px-5 py-3 text-xs font-semibold text-on-surface-muted uppercase tracking-wide whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#f0edef]">
                   {data?.orders.map((o) => (
                     <tr key={o.id} className="hover:bg-[#f9f7f8] transition-colors">
-                      <td className="px-5 py-3 font-mono text-xs text-[#76777d]">#{o.id.slice(0,8).toUpperCase()}</td>
-                      <td className="px-5 py-3 font-medium text-[#1b1b1d]">{o.user?.name ?? "—"}</td>
-                      <td className="px-5 py-3 font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">{formatPrice(o.total)}</td>
+                      <td className="px-5 py-3 font-mono text-xs text-on-surface-muted">#{o.id.slice(0,8).toUpperCase()}</td>
+                      <td className="px-5 py-3 font-medium text-on-surface">{o.user?.name ?? "—"}</td>
+                      <td className="px-5 py-3 font-bold text-primary font-display">{formatPrice(o.total)}</td>
                       <td className="px-5 py-3"><OrderStatusBadge status={o.status} /></td>
-                      <td className="px-5 py-3 text-[#76777d] whitespace-nowrap">{formatDate(o.createdAt)}</td>
+                      <td className="px-5 py-3 text-on-surface-muted whitespace-nowrap">{formatDate(o.createdAt)}</td>
                       <td className="px-5 py-3">
-                        <button onClick={() => setViewOrder(o)} className="p-1.5 text-[#45464d] hover:bg-[#f0edef] rounded-lg transition-all"><Eye size={14} /></button>
+                        <button onClick={() => setViewOrder(o)} className="p-1.5 text-on-surface-variant hover:bg-surface-container rounded-lg transition-all"><Eye size={14} /></button>
                       </td>
                     </tr>
                   ))}
@@ -136,7 +136,7 @@ export default function AdminOrdersPage() {
             )}
         </div>
         {(data?.total ?? 0) > LIMIT && (
-          <div className="p-4 border-t border-[#eae7e9]">
+          <div className="p-4 border-t border-surface-high">
             <Pagination page={page} total={data?.total ?? 0} limit={LIMIT} onChange={setPage} />
           </div>
         )}

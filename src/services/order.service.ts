@@ -10,7 +10,7 @@ function mapOrder(order: RawOrder): Order {
 }
 
 export const orderService = {
-  // User's own orders
+  // Endpoints for the logged-in user
   async getMyOrders(params?: { page?: number; limit?: number }): Promise<OrdersResponse> {
     const res = await apiClient.get("/orders", { params });
     return mapOrdersResponse(res);
@@ -26,7 +26,7 @@ export const orderService = {
     return mapOrder(extractData<RawOrder>(res));
   },
 
-  // Admin endpoints
+  // Endpoints for admins
   async getAllOrders(params?: { page?: number; limit?: number; status?: string }): Promise<OrdersResponse> {
     const res = await apiClient.get("/orders", { params });
     return mapOrdersResponse(res);

@@ -6,18 +6,18 @@ type StatusVariant = OrderStatus | ProductStatus | "ADMIN" | "USER" | "active" |
 
 const statusConfig: Record<string, { label: string; className: string }> = {
   // Order statuses
-  PENDING:   { label: "Pending",   className: "bg-[#fef3c7] text-[#92400e]" },
-  CONFIRMED: { label: "Confirmed", className: "bg-[#e0e7ff] text-[#3730a3]" },
-  SHIPPED:   { label: "Shipped",   className: "bg-[#dbeafe] text-[#1e40af]" },
-  DELIVERED: { label: "Delivered", className: "bg-[#d1fae5] text-[#065f46]" },
-  CANCELLED: { label: "Cancelled", className: "bg-[#f1f5f9] text-[#475569]" },
+  PENDING:   { label: "Pending",   className: "bg-pending-bg text-pending-text" },
+  CONFIRMED: { label: "Confirmed", className: "bg-confirmed-bg text-confirmed-text" },
+  SHIPPED:   { label: "Shipped",   className: "bg-shipped-bg text-shipped-text" },
+  DELIVERED: { label: "Delivered", className: "bg-delivered-bg text-delivered-text" },
+  CANCELLED: { label: "Cancelled", className: "bg-cancelled-bg text-cancelled-text" },
   // Product statuses
-  ACTIVE:    { label: "Active",    className: "bg-[#d1fae5] text-[#065f46]" },
-  INACTIVE:  { label: "Inactive",  className: "bg-[#f1f5f9] text-[#64748b]" },
-  ARCHIVED:  { label: "Archived",  className: "bg-[#e4e2e4] text-[#76777d]" },
+  ACTIVE:    { label: "Active",    className: "bg-delivered-bg text-delivered-text" },
+  INACTIVE:  { label: "Inactive",  className: "bg-cancelled-bg text-inactive-text" },
+  ARCHIVED:  { label: "Archived",  className: "bg-archived-bg text-on-surface-muted" },
   // User roles
-  ADMIN:     { label: "Admin",     className: "bg-[#e0e7ff] text-[#3730a3]" },
-  USER:      { label: "User",      className: "bg-[#f0edef] text-[#45464d]"  },
+  ADMIN:     { label: "Admin",     className: "bg-confirmed-bg text-confirmed-text" },
+  USER:      { label: "User",      className: "bg-surface-container text-on-surface-variant"  },
 };
 
 interface StatusBadgeProps {
@@ -26,11 +26,11 @@ interface StatusBadgeProps {
 }
 
 export default function StatusBadge({ status, className }: StatusBadgeProps) {
-  const config = statusConfig[status] ?? { label: status, className: "bg-[#f0edef] text-[#45464d]" };
+  const config = statusConfig[status] ?? { label: status, className: "bg-surface-container text-on-surface-variant" };
   return (
     <span
       className={cn(
-        "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium font-[family-name:var(--font-geist)] whitespace-nowrap",
+        "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium font-display whitespace-nowrap",
         config.className,
         className
       )}
@@ -40,7 +40,7 @@ export default function StatusBadge({ status, className }: StatusBadgeProps) {
   );
 }
 
-// Specialized alias for order status — same component, just for clarity
+// Nice little alias so callers can use a clearer name for order statuses
 export function OrderStatusBadge({ status, className }: { status: OrderStatus; className?: string }) {
   return <StatusBadge status={status} className={className} />;
 }

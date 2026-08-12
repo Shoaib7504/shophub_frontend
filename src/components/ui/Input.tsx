@@ -28,28 +28,28 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={id}
-            className="text-sm font-medium text-[#1b1b1d] font-[family-name:var(--font-geist)]"
+            className="text-sm font-medium text-on-surface font-display"
           >
             {label}
           </label>
         )}
         <div className="relative flex items-center">
           {leftIcon && (
-            <span className="absolute left-3 text-[#76777d]">{leftIcon}</span>
+            <span className="absolute left-3 text-on-surface-muted">{leftIcon}</span>
           )}
           <input
             ref={ref}
             id={id}
             type={inputType}
             className={cn(
-              "w-full h-10 rounded-xl border bg-white px-3 text-sm text-[#1b1b1d]",
-              "placeholder:text-[#76777d]",
+              "w-full h-10 rounded-xl border bg-white px-3 text-sm text-on-surface",
+              "placeholder:text-on-surface-muted",
               "transition-all duration-200",
               "outline-none",
-              "focus:border-[#006c49] focus:ring-2 focus:ring-[#006c49]/20",
+              "focus:border-secondary focus:ring-2 focus:ring-secondary/20",
               error
-                ? "border-[#ba1a1a] focus:border-[#ba1a1a] focus:ring-[#ba1a1a]/20"
-                : "border-[#c6c6cd]",
+                ? "border-error focus:border-error focus:ring-error/20"
+                : "border-outline-variant",
               leftIcon && "pl-10",
               (rightIcon || isPassword) && "pr-10",
               className
@@ -60,7 +60,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             <button
               type="button"
               tabIndex={-1}
-              className="absolute right-3 text-[#76777d] hover:text-[#1b1b1d] transition-colors"
+              className="absolute right-3 text-on-surface-muted hover:text-on-surface transition-colors"
               onClick={() => setShowPassword((v) => !v)}
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
@@ -68,11 +68,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             </button>
           )}
           {!isPassword && rightIcon && (
-            <span className="absolute right-3 text-[#76777d]">{rightIcon}</span>
+            <span className="absolute right-3 text-on-surface-muted">{rightIcon}</span>
           )}
         </div>
-        {error && <p className="text-xs text-[#ba1a1a]" role="alert">{error}</p>}
-        {hint && !error && <p className="text-xs text-[#76777d]">{hint}</p>}
+        {error && <p className="text-xs text-error" role="alert">{error}</p>}
+        {hint && !error && <p className="text-xs text-on-surface-muted">{hint}</p>}
       </div>
     );
   }

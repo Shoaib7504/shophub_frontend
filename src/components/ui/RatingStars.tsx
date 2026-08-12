@@ -41,7 +41,7 @@ export default function RatingStars({
               size={size}
               className={cn(
                 "transition-colors",
-                filled ? "fill-[#d97706] text-[#d97706]" : "fill-transparent text-[#c6c6cd]"
+                filled ? "fill-warning text-warning" : "fill-transparent text-outline-variant"
               )}
             />
           </button>

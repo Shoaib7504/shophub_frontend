@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
-import { useEffect, useCallback, type ReactNode } from "react";
+import { useEffect, useRef, useCallback, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 interface ModalProps {
@@ -20,22 +20,50 @@ const sizeMap = {
   xl: "max-w-2xl",
 };
 
+const focusableSelector =
+  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
 export default function Modal({ open, onClose, title, children, size = "md" }: ModalProps) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
+
   const handleKey = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key === "Tab" && panelRef.current) {
+        const focusables = panelRef.current.querySelectorAll<HTMLElement>(focusableSelector);
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     },
     [onClose]
   );
 
   useEffect(() => {
-    if (open) {
-      document.addEventListener("keydown", handleKey);
-      document.body.style.overflow = "hidden";
-    }
+    if (!open) return;
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+    document.addEventListener("keydown", handleKey);
+    document.body.style.overflow = "hidden";
+    // Move focus into the modal once it's on screen
+    requestAnimationFrame(() => {
+      const focusables = panelRef.current?.querySelectorAll<HTMLElement>(focusableSelector);
+      (focusables?.[0] ?? panelRef.current)?.focus();
+    });
     return () => {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = "";
+      previouslyFocused.current?.focus?.();
     };
   }, [open, handleKey]);
 
@@ -50,29 +78,31 @@ export default function Modal({ open, onClose, title, children, size = "md" }: M
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-[#1b1b1d]/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-on-surface/40 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
       {/* Panel */}
       <div
+        ref={panelRef}
+        tabIndex={-1}
         className={cn(
-          "relative w-full bg-white rounded-2xl shadow-[0_20px_60px_rgba(15,23,42,0.15)]",
+          "relative w-full bg-surface rounded-2xl shadow-[0_20px_60px_rgba(15,23,42,0.15)]",
           "animate-fade-in",
           sizeMap[size]
         )}
       >
         {title && (
-          <div className="flex items-center justify-between px-6 py-4 border-b border-[#eae7e9]">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-surface-high">
             <h2
               id="modal-title"
-              className="text-lg font-semibold text-[#1b1b1d] font-[family-name:var(--font-geist)]"
+              className="text-lg font-semibold text-on-surface font-display"
             >
               {title}
             </h2>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-[#76777d] hover:text-[#1b1b1d] hover:bg-[#f0edef] transition-colors"
+              className="p-1.5 rounded-lg text-on-surface-muted hover:text-on-surface hover:bg-surface-container transition-colors"
               aria-label="Close modal"
             >
               <X size={18} />

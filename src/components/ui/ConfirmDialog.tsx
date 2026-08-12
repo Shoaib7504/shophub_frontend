@@ -27,10 +27,10 @@ export default function ConfirmDialog({
     <Modal open={open} onClose={onClose} title={title} size="sm">
       <div className="flex flex-col gap-5">
         <div className="flex items-start gap-3">
-          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#ffdad6] flex items-center justify-center">
-            <AlertTriangle size={18} className="text-[#ba1a1a]" />
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-error-container flex items-center justify-center">
+            <AlertTriangle size={18} className="text-error" />
           </div>
-          <p className="text-sm text-[#45464d] leading-relaxed pt-1">{message}</p>
+          <p className="text-sm text-on-surface-variant leading-relaxed pt-1">{message}</p>
         </div>
         <div className="flex gap-3 justify-end">
           <Button variant="secondary" size="sm" onClick={onClose} disabled={loading}>

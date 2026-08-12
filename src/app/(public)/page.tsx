@@ -28,32 +28,32 @@ const benefits = [
     icon: ShieldCheck,
     title: "Secure Shopping",
     desc: "256-bit encrypted transactions protecting your payment information.",
-    badgeColor: "bg-[#d1fae5]",
-    iconColor: "text-[#065f46]",
-    borderColor: "hover:border-[#006c49]/40",
+    badgeColor: "bg-delivered-bg",
+    iconColor: "text-delivered-text",
+    borderColor: "hover:border-secondary/40",
   },
   {
     icon: Truck,
     title: "Express Shipping",
     desc: "Fast air freight delivery options with real-time tracking on every order.",
-    badgeColor: "bg-[#dbeafe]",
-    iconColor: "text-[#1e40af]",
+    badgeColor: "bg-shipped-bg",
+    iconColor: "text-shipped-text",
     borderColor: "hover:border-[#3b82f6]/40",
   },
   {
     icon: Star,
     title: "Verified Quality",
     desc: "Curated catalog strictly inspected to meet high durability & aesthetic standards.",
-    badgeColor: "bg-[#fef3c7]",
-    iconColor: "text-[#92400e]",
+    badgeColor: "bg-pending-bg",
+    iconColor: "text-pending-text",
     borderColor: "hover:border-[#f59e0b]/40",
   },
   {
     icon: RotateCcw,
     title: "Easy 30-Day Returns",
     desc: "30-day hassle-free full refund policy — simple and transparent.",
-    badgeColor: "bg-[#e0e7ff]",
-    iconColor: "text-[#3730a3]",
+    badgeColor: "bg-confirmed-bg",
+    iconColor: "text-confirmed-text",
     borderColor: "hover:border-[#6366f1]/40",
   },
 ];
@@ -61,28 +61,28 @@ const benefits = [
 export default function HomePage() {
   return (
     <>
-      {/* ── Motion Hero Slider ────────────────────────────────────── */}
+      {/* Hero slider */}
       <HeroSlider />
 
-      {/* ── Infinite Brand Marquee Slider ──────────────────────────── */}
+      {/* Brand logos ticker */}
       <BrandSlider />
 
-      {/* ── Categories Section ───────────────────────────────────── */}
-      <section className="py-20 bg-[#fcf8fa]">
+      {/* Categories */}
+      <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10 gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#006c49]/10 rounded-full text-[#006c49] text-xs font-bold uppercase tracking-wider mb-2 font-[family-name:var(--font-geist)]">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary/10 rounded-full text-secondary text-xs font-bold uppercase tracking-wider mb-2 font-display">
                 <Sparkles size={12} />
                 Explore By Category
               </div>
-              <h2 className="text-3xl font-extrabold text-[#0f172a] font-[family-name:var(--font-geist)] tracking-tight">
+              <h2 className="text-3xl font-extrabold text-primary font-display tracking-tight">
                 Shop By Department
               </h2>
             </div>
             <Link
               href="/categories"
-              className="inline-flex items-center gap-1 text-sm font-bold text-[#006c49] hover:text-[#00503a] transition-colors font-[family-name:var(--font-geist)] group"
+              className="inline-flex items-center gap-1 text-sm font-bold text-secondary hover:text-secondary-hover transition-colors font-display group"
             >
               View all categories
               <ChevronRight size={16} className="transform group-hover:translate-x-1 transition-transform" />
@@ -93,7 +93,7 @@ export default function HomePage() {
             fallback={
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <div key={i} className="h-32 bg-white rounded-2xl animate-skeleton border border-[#eae7e9]" />
+                  <div key={i} className="h-32 bg-white rounded-2xl animate-skeleton border border-surface-high" />
                 ))}
               </div>
             }
@@ -103,21 +103,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Featured Products Section ────────────────────────────── */}
-      <section className="py-20 bg-white border-t border-[#eae7e9]">
+      {/* Featured products */}
+      <section className="py-20 bg-white border-t border-surface-high">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10 gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#0f172a]/5 rounded-full text-[#0f172a] text-xs font-bold uppercase tracking-wider mb-2 font-[family-name:var(--font-geist)]">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/5 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-2 font-display">
                 Handpicked Selections
               </div>
-              <h2 className="text-3xl font-extrabold text-[#0f172a] font-[family-name:var(--font-geist)] tracking-tight">
+              <h2 className="text-3xl font-extrabold text-primary font-display tracking-tight">
                 Featured Products
               </h2>
             </div>
             <Link
               href="/products"
-              className="inline-flex items-center gap-1 text-sm font-bold text-[#0f172a] hover:text-[#006c49] transition-colors font-[family-name:var(--font-geist)] group"
+              className="inline-flex items-center gap-1 text-sm font-bold text-primary hover:text-secondary transition-colors font-display group"
             >
               View full catalog
               <ChevronRight size={16} className="transform group-hover:translate-x-1 transition-transform" />
@@ -138,17 +138,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── "Why ShopHub" Feature Grid Section ───────────────────── */}
-      <section className="py-20 bg-[#fcf8fa] border-t border-[#eae7e9]">
+      {/* "Why ShopHub" benefits grid */}
+      <section className="py-20 bg-background border-t border-surface-high">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#006c49] font-[family-name:var(--font-geist)]">
+            <p className="text-xs font-bold uppercase tracking-widest text-secondary font-display">
               The ShopHub Promise
             </p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] font-[family-name:var(--font-geist)] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-primary font-display tracking-tight">
               Why Thousands Choose ShopHub
             </h2>
-            <p className="text-base text-[#76777d]">
+            <p className="text-base text-on-surface-muted">
               We prioritize your peace of mind with enterprise security, rapid fulfillment, and unmatched catalog standards.
             </p>
           </div>
@@ -157,16 +157,16 @@ export default function HomePage() {
             {benefits.map(({ icon: Icon, title, desc, badgeColor, iconColor, borderColor }) => (
               <div
                 key={title}
-                className={`bg-white rounded-3xl p-7 border border-[#f0edef] shadow-[0px_4px_25px_rgba(15,23,42,0.04)] ${borderColor} hover:shadow-[0px_12px_40px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col gap-5`}
+                className={`bg-white rounded-3xl p-7 border border-surface-container shadow-[0px_4px_25px_rgba(15,23,42,0.04)] ${borderColor} hover:shadow-[0px_12px_40px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col gap-5`}
               >
                 <div className={`w-14 h-14 rounded-2xl ${badgeColor} flex items-center justify-center shadow-sm`}>
                   <Icon size={26} className={iconColor} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-[#0f172a] font-[family-name:var(--font-geist)] mb-2">
+                  <h3 className="text-lg font-bold text-primary font-display mb-2">
                     {title}
                   </h3>
-                  <p className="text-sm text-[#76777d] leading-relaxed">
+                  <p className="text-sm text-on-surface-muted leading-relaxed">
                     {desc}
                   </p>
                 </div>
@@ -176,21 +176,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CTA Banner Section ───────────────────────────────────── */}
-      <section className="py-20 bg-[#0f172a] relative overflow-hidden">
-        {/* Glow Blobs */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#006c49]/25 rounded-full blur-3xl pointer-events-none" />
+      {/* CTA banner */}
+      <section className="py-20 bg-primary relative overflow-hidden">
+        {/* Soft glowing circles in the background */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-secondary/25 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#3b82f6]/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative max-w-4xl mx-auto px-6 text-center space-y-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-white/15">
-            <Lock size={14} className="text-[#4edea3]" />
-            <span className="text-xs font-semibold text-[#4edea3] uppercase tracking-wider font-[family-name:var(--font-geist)]">
+            <Lock size={14} className="text-mint" />
+            <span className="text-xs font-semibold text-mint uppercase tracking-wider font-display">
               Instant Access & Free Membership
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-[family-name:var(--font-geist)] leading-tight tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-display leading-tight tracking-tight">
             Start Your Premium Shopping Journey Today
           </h2>
 
@@ -201,14 +201,14 @@ export default function HomePage() {
           <div className="flex flex-wrap gap-4 justify-center pt-2">
             <Link
               href="/register"
-              className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#006c49] text-white font-bold rounded-2xl hover:bg-[#00503a] transition-all duration-200 shadow-[0_0_30px_rgba(0,108,73,0.4)] hover:scale-105 active:scale-95 font-[family-name:var(--font-geist)] text-base"
+              className="inline-flex items-center gap-2.5 px-8 py-4 bg-secondary text-white font-bold rounded-2xl hover:bg-secondary-hover transition-all duration-200 shadow-[0_0_30px_rgba(0,108,73,0.4)] hover:scale-105 active:scale-95 font-display text-base"
             >
               Create Free Account
               <ArrowRight size={18} />
             </Link>
             <Link
               href="/products"
-              className="inline-flex items-center gap-2.5 px-8 py-4 bg-white/10 text-white font-bold rounded-2xl border border-white/20 hover:bg-white/15 backdrop-blur-md transition-all duration-200 hover:scale-105 active:scale-95 font-[family-name:var(--font-geist)] text-base"
+              className="inline-flex items-center gap-2.5 px-8 py-4 bg-white/10 text-white font-bold rounded-2xl border border-white/20 hover:bg-white/15 backdrop-blur-md transition-all duration-200 hover:scale-105 active:scale-95 font-display text-base"
             >
               Browse All Products
             </Link>

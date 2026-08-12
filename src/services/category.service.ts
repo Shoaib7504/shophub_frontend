@@ -3,7 +3,7 @@ import type { Category, CreateCategoryInput, UpdateCategoryInput } from "@/types
 
 export const categoryService = {
   async getCategories(): Promise<Category[]> {
-    // Request the backend's max limit so dropdowns/lists aren't capped at the default 10
+    // Ask for the max the backend allows so lists aren't stuck at the default 10
     const res = await apiClient.get("/categories", { params: { limit: 100 } });
     const data = extractData<{ items: Category[] }>(res);
     return data.items;

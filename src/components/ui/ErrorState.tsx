@@ -14,14 +14,14 @@ export default function ErrorState({
 }: ErrorStateProps) {
   return (
     <div className="flex flex-col items-center justify-center text-center py-16 px-4 gap-4">
-      <div className="w-16 h-16 rounded-2xl bg-[#ffdad6] flex items-center justify-center">
-        <AlertCircle size={28} className="text-[#ba1a1a]" />
+      <div className="w-16 h-16 rounded-2xl bg-error-container flex items-center justify-center">
+        <AlertCircle size={28} className="text-error" />
       </div>
       <div className="space-y-1.5 max-w-xs">
-        <p className="text-base font-semibold text-[#1b1b1d] font-[family-name:var(--font-geist)]">
+        <p className="text-base font-semibold text-on-surface font-display">
           {title}
         </p>
-        <p className="text-sm text-[#76777d]">{message}</p>
+        <p className="text-sm text-on-surface-muted">{message}</p>
       </div>
       {onRetry && (
         <Button variant="secondary" size="sm" onClick={onRetry}>

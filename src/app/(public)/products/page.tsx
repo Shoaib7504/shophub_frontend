@@ -57,19 +57,19 @@ export default function ProductsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
-      {/* Header */}
+      {/* Page title + result count */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)] mb-1">
+        <h1 className="text-3xl font-bold text-primary font-display mb-1">
           All Products
         </h1>
-        <p className="text-[#76777d]">
+        <p className="text-on-surface-muted">
           {data ? `${data.total} products found` : "Browse our collection"}
         </p>
       </div>
 
-      {/* Filters */}
-      <div className="bg-white rounded-2xl border border-[#eae7e9] shadow-[0px_4px_20px_rgba(15,23,42,0.04)] p-4 mb-8 flex flex-wrap gap-3 items-center">
-        <SlidersHorizontal size={16} className="text-[#76777d] flex-shrink-0" />
+      {/* Search and filter bar */}
+      <div className="bg-white rounded-2xl border border-surface-high shadow-[0px_4px_20px_rgba(15,23,42,0.04)] p-4 mb-8 flex flex-wrap gap-3 items-center">
+        <SlidersHorizontal size={16} className="text-on-surface-muted flex-shrink-0" />
         <SearchInput
           value={filters.search ?? ""}
           onChange={(v) => setFilters((f) => ({ ...f, search: v, page: 1 }))}
@@ -96,7 +96,7 @@ export default function ProductsPage() {
         />
       </div>
 
-      {/* Products Grid */}
+      {/* Product grid */}
       {isError ? (
         <ErrorState onRetry={() => refetch()} />
       ) : isLoading ? (
@@ -118,7 +118,7 @@ export default function ProductsPage() {
             ))}
           </div>
 
-          {/* Pagination */}
+          {/* Page selector */}
           <div className="mt-10">
             <Pagination
               page={filters.page ?? 1}

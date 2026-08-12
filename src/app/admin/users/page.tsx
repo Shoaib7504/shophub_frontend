@@ -44,12 +44,12 @@ export default function AdminUsersPage() {
   return (
     <div className="space-y-6 max-w-6xl">
       <div>
-        <h1 className="text-2xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">Users</h1>
-        <p className="text-sm text-[#76777d]">{data?.total ?? 0} users total</p>
+        <h1 className="text-2xl font-bold text-primary font-display">Users</h1>
+        <p className="text-sm text-on-surface-muted">{data?.total ?? 0} users total</p>
       </div>
 
       <div className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] overflow-hidden">
-        <div className="p-4 border-b border-[#eae7e9] flex flex-wrap gap-3">
+        <div className="p-4 border-b border-surface-high flex flex-wrap gap-3">
           <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1); }} placeholder="Search users…" className="flex-1 min-w-48" />
           <Select value={role} onChange={(e) => { setRole(e.target.value); setPage(1); }} options={roleOptions} className="w-36" />
         </div>
@@ -60,21 +60,21 @@ export default function AdminUsersPage() {
             : (
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-[#f6f3f5] text-left">
+                  <tr className="bg-surface-low text-left">
                     {["Name","Email","Role","Created","Actions"].map((h) => (
-                      <th key={h} className="px-5 py-3 text-xs font-semibold text-[#76777d] uppercase tracking-wide">{h}</th>
+                      <th key={h} className="px-5 py-3 text-xs font-semibold text-on-surface-muted uppercase tracking-wide">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#f0edef]">
                   {data?.users.map((u) => (
                     <tr key={u.id} className="hover:bg-[#f9f7f8] transition-colors">
-                      <td className="px-5 py-3 font-semibold text-[#1b1b1d]">{u.name}</td>
-                      <td className="px-5 py-3 text-[#76777d]">{u.email}</td>
+                      <td className="px-5 py-3 font-semibold text-on-surface">{u.name}</td>
+                      <td className="px-5 py-3 text-on-surface-muted">{u.email}</td>
                       <td className="px-5 py-3"><StatusBadge status={u.role} /></td>
-                      <td className="px-5 py-3 text-[#76777d] whitespace-nowrap">{formatDate(u.createdAt)}</td>
+                      <td className="px-5 py-3 text-on-surface-muted whitespace-nowrap">{formatDate(u.createdAt)}</td>
                       <td className="px-5 py-3">
-                        <button onClick={() => setDeleteId(u.id)} className="p-1.5 text-[#76777d] hover:bg-[#ffdad6] hover:text-[#ba1a1a] rounded-lg transition-all"><Trash2 size={14} /></button>
+                        <button onClick={() => setDeleteId(u.id)} className="p-1.5 text-on-surface-muted hover:bg-error-container hover:text-error rounded-lg transition-all"><Trash2 size={14} /></button>
                       </td>
                     </tr>
                   ))}
@@ -83,7 +83,7 @@ export default function AdminUsersPage() {
             )}
         </div>
         {(data?.total ?? 0) > LIMIT && (
-          <div className="p-4 border-t border-[#eae7e9]">
+          <div className="p-4 border-t border-surface-high">
             <Pagination page={page} total={data?.total ?? 0} limit={LIMIT} onChange={setPage} />
           </div>
         )}

@@ -69,8 +69,8 @@ export default function AdminCategoriesPage() {
     <div className="space-y-6 max-w-4xl">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)]">Categories</h1>
-          <p className="text-sm text-[#76777d]">{categories?.length ?? 0} categories</p>
+          <h1 className="text-2xl font-bold text-primary font-display">Categories</h1>
+          <p className="text-sm text-on-surface-muted">{categories?.length ?? 0} categories</p>
         </div>
         <Button onClick={() => { setEditCat(undefined); setModalOpen(true); }}>
           <Plus size={16} /> Add Category
@@ -78,7 +78,7 @@ export default function AdminCategoriesPage() {
       </div>
 
       <div className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] overflow-hidden">
-        <div className="p-4 border-b border-[#eae7e9]">
+        <div className="p-4 border-b border-surface-high">
           <SearchInput value={search} onChange={setSearch} placeholder="Search categories…" className="max-w-sm" />
         </div>
         <div className="overflow-x-auto">
@@ -88,9 +88,9 @@ export default function AdminCategoriesPage() {
             : (
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-[#f6f3f5] text-left">
+                  <tr className="bg-surface-low text-left">
                     {["Image","Name","Description","Products","Created","Actions"].map((h) => (
-                      <th key={h} className="px-5 py-3 text-xs font-semibold text-[#76777d] uppercase tracking-wide">{h}</th>
+                      <th key={h} className="px-5 py-3 text-xs font-semibold text-on-surface-muted uppercase tracking-wide">{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -105,14 +105,14 @@ export default function AdminCategoriesPage() {
                           <span className="w-9 h-9 rounded-lg block" style={{ background: stringToGradient(c.id) }} />
                         )}
                       </td>
-                      <td className="px-5 py-3 font-semibold text-[#1b1b1d]">{c.name}</td>
-                      <td className="px-5 py-3 text-[#76777d] max-w-xs truncate">{c.description ?? "—"}</td>
-                      <td className="px-5 py-3 text-[#45464d]">{c._count?.products ?? "—"}</td>
-                      <td className="px-5 py-3 text-[#76777d] whitespace-nowrap">{formatDate(c.createdAt)}</td>
+                      <td className="px-5 py-3 font-semibold text-on-surface">{c.name}</td>
+                      <td className="px-5 py-3 text-on-surface-muted max-w-xs truncate">{c.description ?? "—"}</td>
+                      <td className="px-5 py-3 text-on-surface-variant">{c._count?.products ?? "—"}</td>
+                      <td className="px-5 py-3 text-on-surface-muted whitespace-nowrap">{formatDate(c.createdAt)}</td>
                       <td className="px-5 py-3">
                         <div className="flex gap-1.5">
-                          <button onClick={() => { setEditCat(c); setModalOpen(true); }} className="p-1.5 text-[#45464d] hover:bg-[#f0edef] rounded-lg transition-all"><Pencil size={14} /></button>
-                          <button onClick={() => setDeleteId(c.id)} className="p-1.5 text-[#76777d] hover:bg-[#ffdad6] hover:text-[#ba1a1a] rounded-lg transition-all"><Trash2 size={14} /></button>
+                          <button onClick={() => { setEditCat(c); setModalOpen(true); }} className="p-1.5 text-on-surface-variant hover:bg-surface-container rounded-lg transition-all"><Pencil size={14} /></button>
+                          <button onClick={() => setDeleteId(c.id)} className="p-1.5 text-on-surface-muted hover:bg-error-container hover:text-error rounded-lg transition-all"><Trash2 size={14} /></button>
                         </div>
                       </td>
                     </tr>

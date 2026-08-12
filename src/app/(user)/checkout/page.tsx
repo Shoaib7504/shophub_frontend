@@ -38,47 +38,47 @@ export default function CheckoutPage() {
       toast.success("Order placed successfully!");
       router.push("/orders");
     } catch {
-      // Error toast handled by the hook
+      // The hook already shows an error toast
     }
   };
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-[#0f172a] font-[family-name:var(--font-geist)] mb-8">
+      <h1 className="text-3xl font-bold text-primary font-display mb-8">
         Checkout
       </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-        {/* Left: Customer + Items */}
+        {/* Customer info + cart items */}
         <div className="lg:col-span-3 space-y-6">
-          {/* Customer Info */}
+          {/* Customer info */}
           <div className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] p-6">
-            <h2 className="font-bold text-[#1b1b1d] font-[family-name:var(--font-geist)] mb-5 flex items-center gap-2">
-              <User size={18} className="text-[#006c49]" />
+            <h2 className="font-bold text-on-surface font-display mb-5 flex items-center gap-2">
+              <User size={18} className="text-secondary" />
               Customer Information
             </h2>
             <div className="space-y-3">
-              <div className="flex items-center gap-3 p-3 bg-[#f6f3f5] rounded-xl">
-                <User size={16} className="text-[#76777d]" />
+              <div className="flex items-center gap-3 p-3 bg-surface-low rounded-xl">
+                <User size={16} className="text-on-surface-muted" />
                 <div>
-                  <p className="text-xs text-[#76777d]">Full Name</p>
-                  <p className="text-sm font-medium text-[#1b1b1d]">{user?.name}</p>
+                  <p className="text-xs text-on-surface-muted">Full Name</p>
+                  <p className="text-sm font-medium text-on-surface">{user?.name}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-3 bg-[#f6f3f5] rounded-xl">
-                <Mail size={16} className="text-[#76777d]" />
+              <div className="flex items-center gap-3 p-3 bg-surface-low rounded-xl">
+                <Mail size={16} className="text-on-surface-muted" />
                 <div>
-                  <p className="text-xs text-[#76777d]">Email</p>
-                  <p className="text-sm font-medium text-[#1b1b1d]">{user?.email}</p>
+                  <p className="text-xs text-on-surface-muted">Email</p>
+                  <p className="text-sm font-medium text-on-surface">{user?.email}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Order Items */}
+          {/* Items being ordered */}
           <div className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] p-6">
-            <h2 className="font-bold text-[#1b1b1d] font-[family-name:var(--font-geist)] mb-5 flex items-center gap-2">
-              <ShoppingBag size={18} className="text-[#006c49]" />
+            <h2 className="font-bold text-on-surface font-display mb-5 flex items-center gap-2">
+              <ShoppingBag size={18} className="text-secondary" />
               Order Items ({items.length})
             </h2>
             <div className="divide-y divide-[#f0edef]">
@@ -91,10 +91,10 @@ export default function CheckoutPage() {
                     <Package size={18} className="text-white/60" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-[#1b1b1d] line-clamp-1">{item.title}</p>
-                    <p className="text-xs text-[#76777d]">Qty: {item.quantity}</p>
+                    <p className="text-sm font-medium text-on-surface line-clamp-1">{item.title}</p>
+                    <p className="text-xs text-on-surface-muted">Qty: {item.quantity}</p>
                   </div>
-                  <p className="text-sm font-semibold text-[#0f172a] font-[family-name:var(--font-geist)] flex-shrink-0">
+                  <p className="text-sm font-semibold text-primary font-display flex-shrink-0">
                     {formatPrice(item.price * item.quantity)}
                   </p>
                 </div>
@@ -103,25 +103,25 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        {/* Right: Summary */}
+        {/* Totals and place order button */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(15,23,42,0.05)] p-6 sticky top-24">
-            <h2 className="font-bold text-[#1b1b1d] font-[family-name:var(--font-geist)] text-lg mb-5">
+            <h2 className="font-bold text-on-surface font-display text-lg mb-5">
               Order Summary
             </h2>
 
-            <div className="space-y-2 pb-4 border-b border-[#f0edef] mb-4">
+            <div className="space-y-2 pb-4 border-b border-surface-container mb-4">
               <div className="flex justify-between text-sm">
-                <span className="text-[#76777d]">Subtotal</span>
+                <span className="text-on-surface-muted">Subtotal</span>
                 <span className="font-medium">{formatPrice(subtotal)}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-[#76777d]">Shipping</span>
-                <span className="font-medium text-[#006c49]">Free</span>
+                <span className="text-on-surface-muted">Shipping</span>
+                <span className="font-medium text-secondary">Free</span>
               </div>
             </div>
 
-            <div className="flex justify-between font-bold text-[#0f172a] font-[family-name:var(--font-geist)] text-lg mb-6">
+            <div className="flex justify-between font-bold text-primary font-display text-lg mb-6">
               <span>Total</span>
               <span>{formatPrice(subtotal)}</span>
             </div>
@@ -135,7 +135,7 @@ export default function CheckoutPage() {
               Place Order
             </Button>
 
-            <p className="text-xs text-[#76777d] text-center mt-3">
+            <p className="text-xs text-on-surface-muted text-center mt-3">
               By placing this order you agree to our terms.
             </p>
           </div>

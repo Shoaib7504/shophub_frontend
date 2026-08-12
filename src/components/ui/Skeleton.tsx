@@ -10,7 +10,7 @@ export function Skeleton({ className, style }: SkeletonProps) {
   return (
     <div
       className={cn(
-        "bg-[#eae7e9] rounded-lg animate-skeleton",
+        "bg-surface-high rounded-lg animate-skeleton",
         className
       )}
       style={style}
@@ -37,15 +37,15 @@ export function ProductSkeleton() {
 export function TableSkeleton({ rows = 5 }: { rows?: number }) {
   return (
     <div className="space-y-2">
-      {/* Header */}
-      <div className="flex gap-4 pb-3 border-b border-[#eae7e9]">
+      {/* Table heading */}
+      <div className="flex gap-4 pb-3 border-b border-surface-high">
         {[30, 20, 15, 15, 20].map((w, i) => (
           <Skeleton key={i} className={`h-4`} style={{ width: `${w}%` }} />
         ))}
       </div>
-      {/* Rows */}
+      {/* Data rows */}
       {Array.from({ length: rows }).map((_, i) => (
-        <div key={i} className="flex gap-4 py-3 border-b border-[#f0edef]">
+        <div key={i} className="flex gap-4 py-3 border-b border-surface-container">
           {[30, 20, 15, 15, 20].map((w, j) => (
             <Skeleton key={j} className="h-4" style={{ width: `${w}%` }} />
           ))}
@@ -79,7 +79,7 @@ export function OrderSkeleton() {
         <Skeleton className="h-6 w-20 rounded-full" />
       </div>
       <Skeleton className="h-3 w-48" />
-      <div className="flex justify-between items-center pt-2 border-t border-[#f0edef]">
+      <div className="flex justify-between items-center pt-2 border-t border-surface-container">
         <Skeleton className="h-4 w-24" />
         <Skeleton className="h-8 w-24 rounded-lg" />
       </div>

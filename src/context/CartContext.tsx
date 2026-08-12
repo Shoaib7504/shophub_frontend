@@ -71,7 +71,7 @@ const CartContext = createContext<CartContextValue | null>(null);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, { items: [] });
 
-  // Hydrate from localStorage
+  // Load the saved cart from localStorage on first render
   useEffect(() => {
     try {
       const stored = localStorage.getItem(CART_KEY);
@@ -79,11 +79,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         dispatch({ type: "HYDRATE", payload: JSON.parse(stored) as CartItem[] });
       }
     } catch {
-      // ignore invalid JSON
+      // bad JSON in storage, so just start with an empty cart
     }
   }, []);
 
-  // Persist to localStorage on change
+  // Save the cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem(CART_KEY, JSON.stringify(state.items));
   }, [state.items]);

@@ -16,7 +16,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={id}
-            className="text-sm font-medium text-[#1b1b1d] font-[family-name:var(--font-geist)]"
+            className="text-sm font-medium text-on-surface font-display"
           >
             {label}
           </label>
@@ -25,17 +25,17 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           id={id}
           className={cn(
-            "w-full min-h-[100px] rounded-xl border bg-white px-3 py-2.5 text-sm text-[#1b1b1d]",
-            "placeholder:text-[#76777d] resize-y",
+            "w-full min-h-[100px] rounded-xl border bg-white px-3 py-2.5 text-sm text-on-surface",
+            "placeholder:text-on-surface-muted resize-y",
             "transition-all duration-200 outline-none",
-            "focus:border-[#006c49] focus:ring-2 focus:ring-[#006c49]/20",
-            error ? "border-[#ba1a1a]" : "border-[#c6c6cd]",
+            "focus:border-secondary focus:ring-2 focus:ring-secondary/20",
+            error ? "border-error" : "border-outline-variant",
             className
           )}
           {...props}
         />
-        {error && <p className="text-xs text-[#ba1a1a]" role="alert">{error}</p>}
-        {hint && !error && <p className="text-xs text-[#76777d]">{hint}</p>}
+        {error && <p className="text-xs text-error" role="alert">{error}</p>}
+        {hint && !error && <p className="text-xs text-on-surface-muted">{hint}</p>}
       </div>
     );
   }

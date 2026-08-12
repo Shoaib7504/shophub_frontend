@@ -15,11 +15,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: "bg-[#0f172a] text-white hover:bg-[#1e293b] active:bg-[#334155] shadow-sm",
-  secondary: "bg-white text-[#0f172a] border border-[#c6c6cd] hover:bg-[#f6f3f5] active:bg-[#f0edef]",
-  ghost: "bg-transparent text-[#0f172a] hover:bg-[#f0edef] active:bg-[#eae7e9]",
-  danger: "bg-[#ba1a1a] text-white hover:bg-[#a31515] active:bg-[#8a1212]",
-  outline: "bg-transparent text-[#006c49] border border-[#006c49] hover:bg-[#d1fae5] active:bg-[#a7f3d0]",
+  primary: "bg-primary text-white hover:bg-primary-hover active:bg-primary-light shadow-sm",
+  secondary: "bg-white text-primary border border-outline-variant hover:bg-surface-low active:bg-surface-container",
+  ghost: "bg-transparent text-primary hover:bg-surface-container active:bg-surface-high",
+  danger: "bg-error text-white hover:bg-[#a31515] active:bg-[#8a1212]",
+  outline: "bg-transparent text-secondary border border-secondary hover:bg-delivered-bg active:bg-[#a7f3d0]",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -49,7 +49,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           "inline-flex items-center justify-center font-medium transition-all duration-200 cursor-pointer select-none",
           "disabled:opacity-50 disabled:cursor-not-allowed",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006c49] focus-visible:ring-offset-2",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2",
           variantStyles[variant],
           sizeStyles[size],
           fullWidth && "w-full",

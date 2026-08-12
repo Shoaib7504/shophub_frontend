@@ -8,8 +8,8 @@ import {
   ChevronRight,
   ChevronLeft,
   Star,
-  Package,
-  Users,
+  Truck,
+  RotateCcw,
   Sparkles,
   ShieldCheck,
   Zap,
@@ -40,7 +40,6 @@ interface SlideData {
   mockupTag: string;
   mockupTitle: string;
   mockupPrice: string;
-  mockupRating: string;
 }
 
 const slides: SlideData[] = [
@@ -59,7 +58,7 @@ const slides: SlideData[] = [
     secondaryCtaHref: "/categories",
     gradientText: "from-[#34d399] via-[#10b981] to-[#059669]",
     accentColor: "#10b981",
-    btnBg: "bg-[#006c49] hover:bg-[#00503a]",
+    btnBg: "bg-secondary hover:bg-secondary-hover",
     btnShadow: "shadow-[0_0_30px_rgba(16,185,129,0.35)]",
     badgeBg: "bg-[#10b981]/15",
     badgeText: "text-[#34d399]",
@@ -70,7 +69,6 @@ const slides: SlideData[] = [
     mockupTag: "Masterpiece Choice",
     mockupTitle: "Studio Pro Wireless Headphones",
     mockupPrice: "$299.00",
-    mockupRating: "4.9 (1.2k+ reviews)",
   },
   {
     id: 2,
@@ -98,7 +96,6 @@ const slides: SlideData[] = [
     mockupTag: "Trending Flagship",
     mockupTitle: "Ultra Magnetic 8-in-1 Hub",
     mockupPrice: "$149.00",
-    mockupRating: "5.0 (850+ reviews)",
   },
   {
     id: 3,
@@ -126,7 +123,6 @@ const slides: SlideData[] = [
     mockupTag: "Bestselling Choice",
     mockupTitle: "Minimalist Executive Wood Desk",
     mockupPrice: "$450.00",
-    mockupRating: "4.8 (2.4k+ reviews)",
   },
 ];
 
@@ -177,7 +173,7 @@ export default function HeroSlider() {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Subtle Mesh Grid Background */}
+      {/* Background grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.05] pointer-events-none"
         style={{
@@ -186,7 +182,7 @@ export default function HeroSlider() {
         }}
       />
 
-      {/* Dynamic Slide Ambient Globs */}
+      {/* Soft glowing blobs behind the slide */}
       <motion.div
         key={`blob-1-${slide.id}`}
         initial={{ opacity: 0, scale: 0.8 }}
@@ -214,9 +210,9 @@ export default function HeroSlider() {
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
           >
-            {/* Left Column Content */}
+            {/* Text column */}
             <div className="lg:col-span-7 space-y-8">
-              {/* Slide Badge */}
+              {/* Badge above the title */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -226,19 +222,19 @@ export default function HeroSlider() {
                 <div className="w-2 h-2 rounded-full bg-current animate-pulse" />
                 <BadgeIcon size={14} className={slide.badgeText} />
                 <span
-                  className={`text-xs font-bold ${slide.badgeText} uppercase tracking-wider font-[family-name:var(--font-geist)]`}
+                  className={`text-xs font-bold ${slide.badgeText} uppercase tracking-wider font-display`}
                 >
                   {slide.badge}
                 </span>
               </motion.div>
 
-              {/* Slide Headline */}
+              {/* Title */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.12 }}
               >
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] tracking-tight font-[family-name:var(--font-geist)]">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] tracking-tight font-display">
                   {slide.titlePrefix}{" "}
                   <span
                     className={`text-transparent bg-clip-text bg-gradient-to-r ${slide.gradientText}`}
@@ -250,7 +246,7 @@ export default function HeroSlider() {
                 </h1>
               </motion.div>
 
-              {/* Slide Description */}
+              {/* Description */}
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -269,21 +265,21 @@ export default function HeroSlider() {
               >
                 <Link
                   href={slide.primaryCtaHref}
-                  className={`inline-flex items-center gap-2.5 px-8 py-4 ${slide.btnBg} text-white font-bold rounded-2xl transition-all duration-200 ${slide.btnShadow} hover:scale-[1.03] active:scale-[0.98] font-[family-name:var(--font-geist)] text-base`}
+                  className={`inline-flex items-center gap-2.5 px-8 py-4 ${slide.btnBg} text-white font-bold rounded-2xl transition-all duration-200 ${slide.btnShadow} hover:scale-[1.03] active:scale-[0.98] font-display text-base`}
                 >
                   {slide.primaryCtaText}
                   <ArrowRight size={18} />
                 </Link>
                 <Link
                   href={slide.secondaryCtaHref}
-                  className="inline-flex items-center gap-2.5 px-8 py-4 bg-white/10 text-white font-bold rounded-2xl hover:bg-white/15 transition-all duration-200 border border-white/20 hover:border-white/35 backdrop-blur-md hover:scale-[1.03] active:scale-[0.98] font-[family-name:var(--font-geist)] text-base"
+                  className="inline-flex items-center gap-2.5 px-8 py-4 bg-white/10 text-white font-bold rounded-2xl hover:bg-white/15 transition-all duration-200 border border-white/20 hover:border-white/35 backdrop-blur-md hover:scale-[1.03] active:scale-[0.98] font-display text-base"
                 >
                   {slide.secondaryCtaText}
                   <ChevronRight size={18} />
                 </Link>
               </motion.div>
 
-              {/* Refined Glass Stat Cards */}
+              {/* Stats: free delivery, returns, buyer protection */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -292,50 +288,50 @@ export default function HeroSlider() {
               >
                 <div className="bg-white/[0.06] backdrop-blur-md border border-white/12 rounded-2xl p-3.5 flex items-center gap-3 transition-transform hover:scale-[1.03]">
                   <div className="w-10 h-10 rounded-xl bg-[#10b981]/20 flex items-center justify-center text-[#34d399] flex-shrink-0">
-                    <Package size={20} />
+                    <Truck size={20} />
                   </div>
                   <div>
-                    <p className="text-base sm:text-lg font-extrabold text-white font-[family-name:var(--font-geist)] leading-none">
-                      10K+
+                    <p className="text-base sm:text-lg font-extrabold text-white font-display leading-none">
+                      Free
                     </p>
-                    <p className="text-[11px] text-slate-400 font-medium mt-1">Products</p>
+                    <p className="text-[11px] text-slate-400 font-medium mt-1">Delivery $50+</p>
                   </div>
                 </div>
 
                 <div className="bg-white/[0.06] backdrop-blur-md border border-white/12 rounded-2xl p-3.5 flex items-center gap-3 transition-transform hover:scale-[1.03]">
                   <div className="w-10 h-10 rounded-xl bg-[#38bdf8]/20 flex items-center justify-center text-[#38bdf8] flex-shrink-0">
-                    <Users size={20} />
+                    <RotateCcw size={20} />
                   </div>
                   <div>
-                    <p className="text-base sm:text-lg font-extrabold text-white font-[family-name:var(--font-geist)] leading-none">
-                      50K+
+                    <p className="text-base sm:text-lg font-extrabold text-white font-display leading-none">
+                      30-Day
                     </p>
-                    <p className="text-[11px] text-slate-400 font-medium mt-1">Customers</p>
+                    <p className="text-[11px] text-slate-400 font-medium mt-1">Easy Returns</p>
                   </div>
                 </div>
 
                 <div className="bg-white/[0.06] backdrop-blur-md border border-white/12 rounded-2xl p-3.5 flex items-center gap-3 transition-transform hover:scale-[1.03]">
                   <div className="w-10 h-10 rounded-xl bg-[#f59e0b]/20 flex items-center justify-center text-[#fbbf24] flex-shrink-0">
-                    <Star size={20} />
+                    <ShieldCheck size={20} />
                   </div>
                   <div>
-                    <p className="text-base sm:text-lg font-extrabold text-white font-[family-name:var(--font-geist)] leading-none">
-                      4.9★
+                    <p className="text-base sm:text-lg font-extrabold text-white font-display leading-none">
+                      100%
                     </p>
-                    <p className="text-[11px] text-slate-400 font-medium mt-1">Top Rating</p>
+                    <p className="text-[11px] text-slate-400 font-medium mt-1">Buyer Protection</p>
                   </div>
                 </div>
               </motion.div>
             </div>
 
-            {/* Right Interactive Glass Mockup Card */}
+            {/* Product card mockup on the right */}
             <div className="lg:col-span-5 hidden lg:flex justify-center relative">
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 className="relative w-full max-w-md"
               >
-                {/* Main Card */}
+                {/* The card itself */}
                 <div className="bg-white/[0.08] backdrop-blur-2xl border border-white/20 rounded-3xl p-6 shadow-[0_25px_70px_rgba(0,0,0,0.5)] space-y-5">
                   <div
                     className="w-full h-60 rounded-2xl relative overflow-hidden flex items-center justify-center p-6 shadow-inner"
@@ -343,10 +339,10 @@ export default function HeroSlider() {
                   >
                     <div className="absolute inset-0 bg-black/20" />
                     <div className="relative text-center space-y-2.5">
-                      <span className="inline-block px-3.5 py-1 bg-white/20 backdrop-blur-md text-white text-xs font-bold rounded-full uppercase tracking-wider font-[family-name:var(--font-geist)]">
+                      <span className="inline-block px-3.5 py-1 bg-white/20 backdrop-blur-md text-white text-xs font-bold rounded-full uppercase tracking-wider font-display">
                         {slide.mockupTag}
                       </span>
-                      <p className="text-white text-xl font-extrabold font-[family-name:var(--font-geist)] leading-snug">
+                      <p className="text-white text-xl font-extrabold font-display leading-snug">
                         {slide.mockupTitle}
                       </p>
                     </div>
@@ -355,49 +351,49 @@ export default function HeroSlider() {
                   <div className="flex items-center justify-between pt-1">
                     <div>
                       <p className="text-xs text-slate-400 font-medium uppercase tracking-wide">Starting From</p>
-                      <p className="text-2xl font-extrabold text-white font-[family-name:var(--font-geist)]">
+                      <p className="text-2xl font-extrabold text-white font-display">
                         {slide.mockupPrice}
                       </p>
                     </div>
                     <Link
                       href={slide.primaryCtaHref}
-                      className="px-5 py-2.5 bg-white text-[#0f172a] font-bold text-xs rounded-xl hover:bg-slate-100 transition-colors shadow-md font-[family-name:var(--font-geist)]"
+                      className="px-5 py-2.5 bg-white text-primary font-bold text-xs rounded-xl hover:bg-slate-100 transition-colors shadow-md font-display"
                     >
                       Quick Order
                     </Link>
                   </div>
                 </div>
 
-                {/* Floating Top Rating Pill */}
+                {/* Floating "secure checkout" badge */}
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="absolute -top-5 -right-6 bg-[#0f172a]/90 backdrop-blur-xl rounded-2xl p-3.5 shadow-2xl border border-white/20 flex items-center gap-3 text-white"
+                  className="absolute -top-5 -right-6 bg-primary/90 backdrop-blur-xl rounded-2xl p-3.5 shadow-2xl border border-white/20 flex items-center gap-3 text-white"
                 >
                   <div className="w-9 h-9 rounded-xl bg-[#f59e0b]/20 flex items-center justify-center text-[#fbbf24]">
                     <Star size={18} fill="#fbbf24" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold font-[family-name:var(--font-geist)]">
-                      4.9 / 5.0 Rating
+                    <p className="text-xs font-bold font-display">
+                      256-bit Secure Checkout
                     </p>
-                    <p className="text-[11px] text-slate-400">1,200+ Verified Reviews</p>
+                    <p className="text-[11px] text-slate-400">Encrypted payments</p>
                   </div>
                 </motion.div>
 
-                {/* Floating Bottom Shipping Pill */}
+                {/* Floating "free delivery" badge */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.35 }}
-                  className="absolute -bottom-6 -left-6 bg-[#0f172a]/90 backdrop-blur-xl rounded-2xl p-3.5 shadow-2xl border border-white/20 flex items-center gap-3 text-white"
+                  className="absolute -bottom-6 -left-6 bg-primary/90 backdrop-blur-xl rounded-2xl p-3.5 shadow-2xl border border-white/20 flex items-center gap-3 text-white"
                 >
                   <div className="w-9 h-9 rounded-xl bg-[#10b981]/20 flex items-center justify-center text-[#34d399]">
                     <ShieldCheck size={18} />
                   </div>
                   <div>
-                    <p className="text-xs font-bold font-[family-name:var(--font-geist)]">
+                    <p className="text-xs font-bold font-display">
                       Free Express Delivery
                     </p>
                     <p className="text-[11px] text-slate-400">On all orders over $50</p>
@@ -408,9 +404,9 @@ export default function HeroSlider() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Carousel Controls & Indicators */}
+        {/* Slide controls: dots + arrows */}
         <div className="flex items-center justify-between mt-12 pt-6 border-t border-white/12">
-          {/* Slide Indicators */}
+          {/* Dot indicators */}
           <div className="flex items-center gap-2 sm:gap-3">
             {slides.map((s, idx) => (
               <button
@@ -429,7 +425,7 @@ export default function HeroSlider() {
             ))}
           </div>
 
-          {/* Navigation Arrows */}
+          {/* Prev / next arrows */}
           <div className="flex items-center gap-2.5">
             <button
               onClick={prevSlide}

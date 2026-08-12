@@ -11,7 +11,7 @@ const apiClient = axios.create({
   timeout: 15000,
 });
 
-// ─── Request Interceptor ──────────────────────────────────────────────────────
+// Attach the token to every request
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const token = getToken();
@@ -23,19 +23,19 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// ─── Response Interceptor ─────────────────────────────────────────────────────
+// Handle errors from every response
 apiClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError<{ message?: string; success?: boolean }>) => {
     if (error.response?.status === 401) {
-      // Clear auth state and redirect to login
+      // Token is invalid or expired, so log the user out
       removeToken();
       if (typeof window !== "undefined") {
         // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- hard redirect outside React
         window.location.href = "/login";
       }
     }
-    // Re-throw with a cleaned message for toast notifications
+    // Pass a clean error message up to the UI
     const message =
       error.response?.data?.message ??
       error.message ??
@@ -46,7 +46,7 @@ apiClient.interceptors.response.use(
 
 export default apiClient;
 
-/** Helper: extract `data` from the backend envelope { success, message, data } */
+// The API wraps every response as { success, message, data }, so we pull out the data field
 export function extractData<T>(response: { data: { data: T } }): T {
   return response.data.data;
 }
