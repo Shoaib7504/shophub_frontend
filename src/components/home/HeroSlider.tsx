@@ -188,17 +188,17 @@ export default function HeroSlider() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1.1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className={`absolute top-10 right-10 w-[500px] h-[500px] ${slide.blob1Color} rounded-full blur-[130px] pointer-events-none`}
+        className={`absolute top-10 right-10 w-72 h-72 md:w-[500px] md:h-[500px] ${slide.blob1Color} rounded-full blur-[130px] pointer-events-none`}
       />
       <motion.div
         key={`blob-2-${slide.id}`}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className={`absolute bottom-5 left-10 w-[420px] h-[420px] ${slide.blob2Color} rounded-full blur-[120px] pointer-events-none`}
+        className={`absolute bottom-5 left-10 w-60 h-60 md:w-[420px] md:h-[420px] ${slide.blob2Color} rounded-full blur-[120px] pointer-events-none`}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-16 lg:py-24 w-full">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-24 w-full">
         <AnimatePresence custom={direction} mode="wait">
           <motion.div
             key={slide.id}
@@ -208,10 +208,10 @@ export default function HeroSlider() {
             animate="center"
             exit="exit"
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center"
           >
             {/* Text column */}
-            <div className="lg:col-span-7 space-y-8">
+            <div className="lg:col-span-7 space-y-6 sm:space-y-8">
               {/* Badge above the title */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
@@ -234,7 +234,7 @@ export default function HeroSlider() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.12 }}
               >
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] tracking-tight font-display">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] sm:leading-[1.08] tracking-tight font-display">
                   {slide.titlePrefix}{" "}
                   <span
                     className={`text-transparent bg-clip-text bg-gradient-to-r ${slide.gradientText}`}
@@ -265,14 +265,14 @@ export default function HeroSlider() {
               >
                 <Link
                   href={slide.primaryCtaHref}
-                  className={`inline-flex items-center gap-2.5 px-8 py-4 ${slide.btnBg} text-white font-bold rounded-2xl transition-all duration-200 ${slide.btnShadow} hover:scale-[1.03] active:scale-[0.98] font-display text-base`}
+                  className={`inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 ${slide.btnBg} text-white font-bold rounded-2xl transition-all duration-200 ${slide.btnShadow} hover:scale-[1.03] active:scale-[0.98] font-display text-sm sm:text-base`}
                 >
                   {slide.primaryCtaText}
                   <ArrowRight size={18} />
                 </Link>
                 <Link
                   href={slide.secondaryCtaHref}
-                  className="inline-flex items-center gap-2.5 px-8 py-4 bg-white/10 text-white font-bold rounded-2xl hover:bg-white/15 transition-all duration-200 border border-white/20 hover:border-white/35 backdrop-blur-md hover:scale-[1.03] active:scale-[0.98] font-display text-base"
+                  className="inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 bg-white/10 text-white font-bold rounded-2xl hover:bg-white/15 transition-all duration-200 border border-white/20 hover:border-white/35 backdrop-blur-md hover:scale-[1.03] active:scale-[0.98] font-display text-sm sm:text-base"
                 >
                   {slide.secondaryCtaText}
                   <ChevronRight size={18} />
@@ -284,7 +284,7 @@ export default function HeroSlider() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.24 }}
-                className="grid grid-cols-3 gap-3 sm:gap-4 pt-6 border-t border-white/12 max-w-lg"
+                className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-6 border-t border-white/12 max-w-lg"
               >
                 <div className="bg-white/[0.06] backdrop-blur-md border border-white/12 rounded-2xl p-3.5 flex items-center gap-3 transition-transform hover:scale-[1.03]">
                   <div className="w-10 h-10 rounded-xl bg-[#10b981]/20 flex items-center justify-center text-[#34d399] flex-shrink-0">
@@ -405,7 +405,7 @@ export default function HeroSlider() {
         </AnimatePresence>
 
         {/* Slide controls: dots + arrows */}
-        <div className="flex items-center justify-between mt-12 pt-6 border-t border-white/12">
+        <div className="flex items-center justify-between mt-10 sm:mt-12 pt-6 border-t border-white/12">
           {/* Dot indicators */}
           <div className="flex items-center gap-2 sm:gap-3">
             {slides.map((s, idx) => (
